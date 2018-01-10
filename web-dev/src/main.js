@@ -6,7 +6,7 @@ import axios from 'axios';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 import "babel-polyfill";
-import VueNativeSock from 'vue-native-websocket'
+// import VueNativeSock from 'vue-native-websocket'
 import store from 'store/index'
 // 配置文件
 import config from 'config.js'
