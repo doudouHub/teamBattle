@@ -1,0 +1,90 @@
+@import "mixins";
+
+.sidebar {
+    display          : block;
+    position         : absolute;
+    left             : 0;
+    top              : 50px;
+    bottom           : 0;
+    background-color : #324157;
+    height           : 100%;
+    overflow-y       : auto;
+    &.collapsed {
+        overflow-y : visible;
+    }
+}
+
+.el-menu-sidebar {
+    width : 200px;
+    transition: width .2s;
+    .el-submenu {
+        position   : relative;
+        min-height : 100%;
+        .el-menu-item {
+            padding : 0 47px !important;
+        }
+    }
+    .icon {
+        display        : inline-block;
+        vertical-align : middle;
+        margin-right   : 5px;
+        position       : relative;
+        top            : -1px;
+    }
+    .el-menu-item, .el-submenu__title {
+        transition : all .2s;
+    }
+    &[collapse="true"] {
+        width : 60px;
+        .el-menu, .title, .el-submenu__icon-arrow {
+            display : none;
+        }
+        .el-menu {
+            border-radius : 0;
+            @include stretch(0, false, false, 100%)
+        }
+        .el-submenu {
+            &.is-active {
+                background-color : #1f2d3d;
+            }
+            &:hover {
+                .el-menu {
+                    display : block !important;
+                    z-index : 100;
+                }
+                .el-submenu__title {
+                    background-color : #1f2d3d;
+                }
+            }
+        }
+        .el-menu-item {
+            &:hover, &.is-active {
+                background-color : #1f2d3d;
+            }
+        }
+        .el-menu-item, .el-submenu__title {
+            height      : 50px;
+            line-height : 50px;
+        }
+    }
+}
+
+.el-submenu__icon-arrow {
+    line-height : 56px;
+    margin-top  : 0;
+    top         : 0;
+}
+
+.collapseBtn {
+    color            : rgba(255, 255, 255, .5);
+    background-color : rgba(36, 47, 66, 0.53);
+    display          : block;
+    line-height      : 34px;
+    text-align       : center;
+    font-size        : 24px;
+    cursor           : pointer;
+    transition       : color .2s;
+    &:hover {
+        color : rgba(255, 255, 255, .8);
+    }
+}

@@ -1,0 +1,98 @@
+////////////////////////////////////////////////////////////
+// Import everything to generate your animate styles module //
+////////////////////////////////////////////////////////////
+@import "helpers/_mixins",
+"helpers/_settings",
+"helpers/_base";
+
+// ATTENTION
+@import "animations/attention-seekers/_bounce",
+"animations/attention-seekers/_flash",
+"animations/attention-seekers/_pulse",
+"animations/attention-seekers/_shake",
+"animations/attention-seekers/_swing",
+"animations/attention-seekers/_wiggle",
+"animations/attention-seekers/_wobble",
+"animations/attention-seekers/_tada";
+
+// BOUNCE
+@import "animations/bounce-enter/_bounceIn",
+"animations/bounce-enter/_bounceInDown",
+"animations/bounce-enter/_bounceInLeft",
+"animations/bounce-enter/_bounceInRight",
+"animations/bounce-enter/_bounceInUp",
+"animations/bounce-exit/_bounceOut",
+"animations/bounce-exit/_bounceOutDown",
+"animations/bounce-exit/_bounceOutLeft",
+"animations/bounce-exit/_bounceOutRight",
+"animations/bounce-exit/_bounceOutUp";
+
+// FADE
+@import "animations/fade-enter/_fadeIn",
+"animations/fade-enter/_fadeInDown",
+"animations/fade-enter/_fadeInDownBig",
+"animations/fade-enter/_fadeInLeft",
+"animations/fade-enter/_fadeInLeftBig",
+"animations/fade-enter/_fadeInRight",
+"animations/fade-enter/_fadeInRightBig",
+"animations/fade-enter/_fadeInUp",
+"animations/fade-enter/_fadeInUpBig",
+"animations/fade-exit/_fadeOut",
+"animations/fade-exit/_fadeOutDown",
+"animations/fade-exit/_fadeOutDownBig",
+"animations/fade-exit/_fadeOutLeft",
+"animations/fade-exit/_fadeOutLeftBig",
+"animations/fade-exit/_fadeOutRight",
+"animations/fade-exit/_fadeOutRightBig",
+"animations/fade-exit/_fadeOutUp",
+"animations/fade-exit/_fadeOutUpBig";
+
+// FLIP
+@import "animations/flippers/_flip",
+"animations/flippers/_flipInX",
+"animations/flippers/_flipInY",
+"animations/flippers/_flipOutX",
+"animations/flippers/_flipOutY";
+
+// LIGHTSPEED
+@import "animations/lightspeed/_lightSpeedIn",
+"animations/lightspeed/_lightSpeedOut";
+
+// ROTATE
+@import "animations/rotate-enter/_rotateIn",
+"animations/rotate-enter/_rotateInDownLeft",
+"animations/rotate-enter/_rotateInDownRight",
+"animations/rotate-enter/_rotateInUpLeft",
+"animations/rotate-enter/_rotateInUpRight",
+"animations/rotate-exit/_rotateOut",
+"animations/rotate-exit/_rotateOutDownLeft",
+"animations/rotate-exit/_rotateOutDownRight",
+"animations/rotate-exit/_rotateOutUpLeft",
+"animations/rotate-exit/_rotateOutUpRight";
+
+// SLIDE
+@import "animations/slide-enter/_slideInDown",
+"animations/slide-enter/_slideInLeft",
+"animations/slide-enter/_slideInRight",
+"animations/slide-enter/_slideInUp",
+"animations/slide-exit/_slideOutDown",
+"animations/slide-exit/_slideOutLeft",
+"animations/slide-exit/_slideOutRight",
+"animations/slide-exit/_slideOutUp";
+
+// SPECIAL
+@import "animations/special/_hinge",
+"animations/special/_rollIn",
+"animations/special/_rollOut";
+
+// ZOOM
+@import "animations/zoom-enter/_zoomIn",
+"animations/zoom-enter/_zoomInDown",
+"animations/zoom-enter/_zoomInLeft",
+"animations/zoom-enter/_zoomInRight",
+"animations/zoom-enter/_zoomInUp",
+"animations/zoom-exit/_zoomOut",
+"animations/zoom-exit/_zoomOutDown",
+"animations/zoom-exit/_zoomOutLeft",
+"animations/zoom-exit/_zoomOutRight",
+"animations/zoom-exit/_zoomOutUp";
