@@ -40,5 +40,5 @@ export const mutations = {
             }
         }
         state.rankList = state.rankList.sort(data.self.$sortBy('score')).reverse();
-    }
+    },
 };

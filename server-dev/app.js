@@ -20,8 +20,6 @@
     var uuid = require('node-uuid');
     // 所有ws客户端的链接存储
     var clients = {};
-    // 分发主客户端client_uuid
-    var pub_client_uuid = '';
     // 等待匹配客户端
     var matchingClients = [];
     var clientIndex = 0;
@@ -33,7 +31,7 @@
      **/
     var wsSend = function (client_uuid, data) {
         var clientSocket = null;
-        try {
+        // try {
             if (typeof client_uuid === 'object') {
                 if (!isNaN(client_uuid.length)) {
                     // 当id类型为数组，表示向特定客户端传播信息
@@ -60,9 +58,9 @@
                     clientSocket.send(JSON.stringify(data));
                 }
             }
-        } catch (err) {
-            console.error("报错信息1：" + err);
-        }
+        // } catch (err) {
+        //     console.error("报错信息1：" + err);
+        // }
     };
 
     // socket报错
@@ -76,12 +74,11 @@
     };
 
     // 发布题目 - 记录发布题目的人
-    event.on('publish_ques', function (userId) {
+    event.on('publish_ques', function (client_uuid) {
         var clientSocket = null;
         for (var key in clients) {
             client = clients[key];
-            // client.pub_userid = userId;
-            // client.pub_userid = userId
+            client.pub_client = client_uuid;
         }
     });
 
@@ -111,10 +108,8 @@
                         console.log('新增用户：' + msg.userName, '，客户端连接数量：' + clientIndex);
                         break;
                     case 'distribute':
-                        // 发送/传递题目数据
-                        pub_client_uuid = client_uuid;
-                        // // 发布题目 - 记录发布题目的人
-                        // event.emit('publish_ques');
+                        // 发布题目 - 记录发布题目的人
+                        event.emit('publish_ques', client_uuid);
                         wsSend({}, {
                             "code": 'deliver',
                             "data": msg.data
@@ -149,7 +144,7 @@
                                     });
 
                                     // 向主客户端发送对战成员信息
-                                    wsSend(pub_client_uuid, {
+                                    wsSend(matchedClients[i].pub_client, {
                                         "code": 'matched_mem',
                                         "data": {
                                             userId: clients[matchedClients[i]].userId,
@@ -172,7 +167,7 @@
                             data: msg.data
                         });
 
-                        wsSend(pub_client_uuid, {
+                        wsSend(clients[client_uuid].pub_client, {
                             "code": 'updata_rank', // 发送对方的答案
                             data: msg.data
                         });
@@ -186,11 +181,14 @@
         });
 
         var closeSocket = function (customMessage) {
-            console.warn(clients[client_uuid].userName + '断开连接');
-            // wsSend(client_uuid, {code:'-1',msg:'连接已断开‘});
-            // 删除客户端连接
-            delete clients[client_uuid];
-            clientIndex--;
+            try {
+                console.warn(clients[client_uuid].userName + '断开连接');
+                // wsSend(client_uuid, {code:'-1',msg:'连接已断开‘});
+                // 删除客户端连接
+                delete clients[client_uuid];
+                clientIndex--;
+            } catch (err) {
+            }
         };
 
         ws.on('close', function () {

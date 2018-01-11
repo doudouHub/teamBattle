@@ -1,18 +1,15 @@
 import Vue from 'vue';
-import Vuex from 'vuex'
 import App from './App';
 import router from './router';
 import axios from 'axios';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 import "babel-polyfill";
-// import VueNativeSock from 'vue-native-websocket'
 import store from 'store/index'
 // 配置文件
 import config from 'config.js'
 
 Vue.use(ElementUI);
-// Vue.use(VueNativeSock, config.socket, {store: store, format: 'json'});
 Vue.prototype.$axios = axios;
 
 const vm = new Vue({
