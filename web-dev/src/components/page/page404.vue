@@ -1,13 +1,12 @@
 <template>
     <div>
-        <!--  学生端默认  -->
-        <h1>学生端默认</h1>
+        <h1>404 NotFound</h1>
     </div>
 </template>
 
 <script>
     export default {
-        name: "student"
+        name: "404"
     }
 </script>
 

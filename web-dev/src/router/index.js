@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
-export default  new Router({
+export const router = new Router({
     routes: [
         {
             path: '/',
@@ -11,8 +11,41 @@ export default  new Router({
         },
         {
             path: '/login',
+            meta: {
+                title: '登陆'
+            },
             component: resolve => require(['../components/page/Login.vue'], resolve)
         },
+        {
+            path: '/teacher',
+            meta: {
+                title: '教师端'
+            },
+            component: resolve => require(['../components/teacher/default.vue'], resolve),
+            children: [
+                {
+                    path: '/viewBattle',
+                    component: resolve => require(['../components/teacher/modules/battle_list_view.vue'], resolve),
+                }
+            ]
+        },
+        {
+            path: '/student',
+            meta: {
+                title: '学生端'
+            },
+            component: resolve => require(['../components/student/default.vue'], resolve),
+            children: [
+                {
+                    path: '/battle',
+                    component: resolve => require(['../components/student/modules/battle.vue'], resolve),
+                }
+            ]
+        },
+        // 路由错误，404page
+        {path: '*', component: resolve => require(['../components/page/page404.vue'], resolve)},
+
+
         {
             path: '/home',
             component: resolve => require(['../components/common/Home.vue'], resolve),
@@ -32,4 +65,9 @@ export default  new Router({
             ]
         },
     ]
+})
+
+router.beforeEach((to, from, next) => {
+    window.document.title = to.meta.title;
+    next();
 })

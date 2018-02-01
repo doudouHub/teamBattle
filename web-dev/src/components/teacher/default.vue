@@ -1,10 +1,13 @@
 <template>
-    <!--  老师端默认  -->
+    <div>
+        <!--  老师端默认  -->
+        <h1>老师端默认</h1>
+    </div>
 </template>
 
 <script>
     export default {
-        name: "main"
+        name: "teacher"
     }
 </script>
 

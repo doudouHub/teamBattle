@@ -13,7 +13,6 @@
 <script>
     import vHead from './Header.vue';
     import vSidebar from './Sidebar.vue';
-    import router from '../../../router/index'
     import config from '../../../config.js'
     import {mapGetters, mapActions} from 'vuex'
 
@@ -26,7 +25,7 @@
                 websocketTimer: null
             }
         },
-        computed: mapGetters([
+        computed: mapState([
             'user'
         ]),
         mounted() {
@@ -83,20 +82,9 @@
                             userName: res.data.userName
                         });
                         break;
-                    case 'matched_mem':
-                        // 添加排名成员信息
-                        self.$store.commit('addBattleRankings', res.data);
-                        break;
                     case 'update_result':
                         // 接收对方的答案 - 对学生
                         self.$store.commit('updateAnswering', res.data);
-                        break;
-                    case 'updata_rank':
-                        // 更新排名信息 - 对老师
-                        self.$store.commit('updateBattleRankings', {
-                            data: res.data,
-                            self: self
-                        });
                         break;
                 }
             };

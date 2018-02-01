@@ -13,9 +13,8 @@
 <script>
     import vHead from './Header.vue';
     import vSidebar from './Sidebar.vue';
-    import router from '../../../router/index'
     import config from '../../../config.js'
-    import {mapGetters, mapActions} from 'vuex'
+    import {mapState} from 'vuex'
 
     export default {
         components: {
@@ -26,13 +25,12 @@
                 websocketTimer: null
             }
         },
-        computed: mapGetters([
+        computed: mapState([
             'user'
         ]),
         mounted() {
             const self = this;
             window.websocket = new WebSocket(config.socket);
-
             // websocket连接成功
             websocket.onopen = () => {
                 let sendMsg = {
@@ -42,7 +40,6 @@
                 };
                 websocket.send(JSON.stringify(sendMsg).toString(2));
             };
-
             // websocket接收消息
             websocket.onmessage = (evt) => {
                 let res = JSON.parse(evt.data);
@@ -66,30 +63,9 @@
                             message: res.msg
                         });
                         break;
-                    case 'deliver':
-                        // 接收题目
-                        self.$store.commit('showQuesModal', {
-                            statu: true,
-                            time: res.data.time,
-                            type: res.data.type,
-                            data: res.data.quesData
-                        });
-                        break;
-                    case 'matched':
-                        // 匹配成功 - 传递对方的useId
-                        self.$store.commit('updateMatching', {
-                            statu: true,
-                            userId: res.data.userId,
-                            userName: res.data.userName
-                        });
-                        break;
                     case 'matched_mem':
                         // 添加排名成员信息
                         self.$store.commit('addBattleRankings', res.data);
-                        break;
-                    case 'update_result':
-                        // 接收对方的答案 - 对学生
-                        self.$store.commit('updateAnswering', res.data);
                         break;
                     case 'updata_rank':
                         // 更新排名信息 - 对老师
