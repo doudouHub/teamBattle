@@ -2,6 +2,7 @@
     var path = require('path');
     var events = require('events'); // 引入 events 模块
     var express = require('express');
+    var uuid = require('uuid/v1');
     var WebSocket = require('ws');
 
     var app = express();
@@ -17,7 +18,6 @@
     var WebSocketServer = WebSocket.Server,
         wss = new WebSocketServer({port: 8181});
 
-    var uuid = require('node-uuid');
     // 所有ws客户端的链接存储
     var clients = {};
     // 等待匹配客户端
@@ -31,33 +31,35 @@
      **/
     var wsSend = function (client_uuid, data) {
         var clientSocket = null;
+        data = (typeof data === 'string') ? data : JSON.stringify(data);
+
         // try {
-            if (typeof client_uuid === 'object') {
-                if (!isNaN(client_uuid.length)) {
-                    // 当id类型为数组，表示向特定客户端传播信息
-                    for (var i = 0; i < client_uuid.length; i++) {
-                        clientSocket = clients[client_uuid[i]].ws;
-                        if (clientSocket.readyState === WebSocket.OPEN) {
-                            clientSocket.send(JSON.stringify(data));
-                        }
+        if (typeof client_uuid === 'object') {
+            if (!isNaN(client_uuid.length)) {
+                // 当id类型为数组，表示向特定客户端传播信息
+                for (var i = 0; i < client_uuid.length; i++) {
+                    clientSocket = clients[client_uuid[i]].ws;
+                    if (clientSocket.readyState === WebSocket.OPEN) {
+                        clientSocket.send(data);
                     }
-                } else {
-                    // 当id类型为对象，表示向所有客户端传播信息
-                    for (var key in clients) {
-                        clientSocket = clients[key].ws;
-                        if (clientSocket.readyState === WebSocket.OPEN) {
-                            clientSocket.send(JSON.stringify(data));
-                        }
+                }
+            } else {
+                // 当id类型为对象，表示向所有客户端传播信息
+                for (var key in clients) {
+                    clientSocket = clients[key].ws;
+                    if (clientSocket.readyState === WebSocket.OPEN) {
+                        clientSocket.send(data);
                     }
                 }
             }
-            else {
-                // 当id类型为字符串，表示向单一客户端传播信息
-                clientSocket = clients[client_uuid].ws;
-                if (clientSocket.readyState === WebSocket.OPEN) {
-                    clientSocket.send(JSON.stringify(data));
-                }
+        }
+        else {
+            // 当id类型为字符串，表示向单一客户端传播信息
+            clientSocket = clients[client_uuid].ws;
+            if (clientSocket.readyState === WebSocket.OPEN) {
+                clientSocket.send(data);
             }
+        }
         // } catch (err) {
         //     console.error("报错信息1：" + err);
         // }
@@ -84,10 +86,9 @@
 
     // 客户端和服务端可以用一个端口建立多个socket链接
     wss.on('connection', function (ws) {
-        var client_uuid = uuid.v4();
+        var client_uuid = uuid();
         // 接收消息
         ws.on('message', function (msg) {
-            // console.log(client_uuid);
             if (msg === '0') {
                 // 心跳检测
                 ws.send('1');
@@ -101,10 +102,12 @@
                         }
 
                         // 建立用户关联
-                        clients[client_uuid] = {"ws": ws, "userId": msg.userId, 'userName': msg.userName};
+                        clients[client_uuid] = {"ws": ws, 'userId': msg.userId, 'userName': msg.userName};
                         clientIndex += 1;
-                        wsSend(client_uuid, {"code": 'connected', "data": '', "msg": '连接成功'});
-
+                        wsSend(client_uuid, {
+                            "code": 'connected',
+                            "data": '', "msg": '连接成功'
+                        });
                         console.log('新增用户：' + msg.userName, '，客户端连接数量：' + clientIndex);
                         break;
                     case 'distribute':
@@ -123,7 +126,7 @@
                             if (matchingClients.length) {
                                 // 完成匹配的一对客户端
                                 var matchedClients = [client_uuid, matchingClients[0]];
-                                // console.log(clients[matchingClients[0]], '待匹配客户端');
+                                console.log(matchingClients, '待匹配客户端');
 
                                 // 当匹配容器中有等待人员则直接互相匹配
                                 clients[client_uuid].matchTo = matchingClients[0];
@@ -142,9 +145,8 @@
                                             userName: clients[matchedClients[i]].matchName
                                         }
                                     });
-
                                     // 向主客户端发送对战成员信息
-                                    wsSend(matchedClients[i].pub_client, {
+                                    wsSend(clients[matchedClients[i]].pub_client, {
                                         "code": 'matched_mem',
                                         "data": {
                                             userId: clients[matchedClients[i]].userId,
@@ -157,7 +159,7 @@
                                 matchingClients.push(client_uuid);
                             }
                         } catch (err) {
-                            console.error("报错信息2：" + err);
+                            throw new Error("报错信息2：" + err)
                         }
                         break;
                     case 'result':
@@ -216,7 +218,6 @@
 
     // 查看所有客户端用户名
     global.viewClients = {
-
         length: function () {
             var len = 0;
 

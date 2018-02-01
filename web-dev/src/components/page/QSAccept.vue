@@ -6,7 +6,7 @@
             题目列表：{{quesData.data}}
         </div>
 
-        <!-- 对战面板 -->
+        <!--  对战面板  -->
         <v-battle></v-battle>
 
         <!--  接收题目弹窗  -->
@@ -16,12 +16,12 @@
 
 <script>
     import vBattle from '../modules/vBattle'
-    import vReciveQues from '../modules/vReciveQues.vue'
     import {mapGetters, mapActions} from 'vuex'
 
     export default {
         components: {
-            vBattle, vReciveQues
+            vBattle,
+            vReciveQues: resolve => require(['../modules/vReciveQues.vue'], resolve)
         },
         data() {
             return {}

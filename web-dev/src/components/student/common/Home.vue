@@ -13,8 +13,8 @@
 <script>
     import vHead from './Header.vue';
     import vSidebar from './Sidebar.vue';
-    import router from '../../router/index'
-    import config from '../../config.js'
+    import router from '../../../router/index'
+    import config from '../../../config.js'
     import {mapGetters, mapActions} from 'vuex'
 
     export default {
