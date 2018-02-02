@@ -7,8 +7,11 @@
         <br>
 
         <div>
-            <el-radio v-model="qsType" label="vArithmetic" border @change="getQues">算术题</el-radio>
-            <el-radio v-model="qsType" label="QABattle" border @change="getQues">对战问答</el-radio>
+            <el-radio-group v-model="ques_type_selectid">
+                <el-radio v-for="(item,index) in ques_type_list" :label="item.id" :key="item.id" border
+                          @change="getQues(index)">{{item.title}}
+                </el-radio>
+            </el-radio-group>
         </div>
         <br>
         <br>
@@ -17,14 +20,14 @@
 
         <!--<div class="ques-list-group">-->
         <!--<el-checkbox-group-->
-        <!--v-model="checkedQues" v-if="qsTypeSelect==='vArithmetic'">-->
-        <!--<el-checkbox v-for="item in quesOptions" :label="item.id" :key="item.id" border>{{item.content}}-->
+        <!--v-model="ques_list_selectid" v-if="qsTypeSelect==='vArithmetic'">-->
+        <!--<el-checkbox v-for="item in ques_list" :label="item.id" :key="item.id" border>{{item.content}}-->
         <!--</el-checkbox>-->
         <!--</el-checkbox-group>-->
 
         <!--<el-checkbox-group-->
-        <!--v-model="checkedQues" v-else-if="qsTypeSelect==='QABattle'">-->
-        <!--<el-checkbox v-for="item in quesOptions" :label="item.id" :key="item.id" border>{{item.content}}-->
+        <!--v-model="ques_list_selectid" v-else-if="qsTypeSelect==='QABattle'">-->
+        <!--<el-checkbox v-for="item in ques_list" :label="item.id" :key="item.id" border>{{item.content}}-->
         <!--</el-checkbox>-->
         <!--</el-checkbox-group>-->
         <!--</div>-->
@@ -36,66 +39,57 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex'
+    import {mapState, mapActions} from 'vuex'
 
     export default {
         data() {
             return {
-                qsType: 1,
-                qsTypeSelect: '',
-                checkedQues: [1],
-                quesOptions: [
-                    {
-                        id: 1,
-                        content: '1+1=?'
-                    },
-                    {
-                        id: 2,
-                        content: '2+2=?'
-                    },
-                    {
-                        id: 3,
-                        content: '3+3=?'
-                    },
-                    {
-                        id: 4,
-                        content: '4+4=?'
-                    },
-                    {
-                        id: 5,
-                        content: '5+5=?'
-                    },
-                    {
-                        id: 6,
-                        content: '6+6=?'
-                    }
-                ]
+                // 题型列表
+                ques_type_list: [],
+                // 选择的题型id
+                ques_type_selectid: 1,
+                // 题目列表
+                ques_list: [],
+                // 选择的题目id列表
+                ques_list_selectid: [1],
             };
+        },
+        computed: {
+            ...mapState('teacher', [
+                'quesData',
+                'distriLoading'
+            ])
+        },
+        mounted() {
+            const self = this;
+            // 获取题型列表
+            this.$http('GET', '/static/dataJson/ques_type.json', {}, (data) => {
+                self.ques_type_list = data.list;
+            })
         },
         methods: {
             // 分布题目
             distribute() {
                 const self = this;
-                // 分发题目
+                // 向学生端分发题目
                 websocket.send(JSON.stringify({
                     type: 'distribute', // 分发题目
                     data: {
                         time: 120, // 答题时间
-                        type: self.qsTypeSelect,
-                        quesData: self.checkedQues.join(',')
+                        type: self.ques_type_selectid,
+                        quesData: self.ques_list_selectid.join(',')
                     }
                 }));
-                this.$store.commit('showDistriLoading', this);
+                this.$store.dispatch('teacher/distriForLoading');
             },
-            // 获得对应题型
-            getQues(val) {
-                this.qsTypeSelect = val;
+            // 获得对应题型内容
+            getQues(index) {
+                const self = this;
+                this.$http('GET', '/static/dataJson/' + this.ques_type_list[index].type + '.json', {}, (data) => {
+                    self.ques_list = data.list;
+                })
             }
         },
-        computed: mapState([
-            'quesData',
-            'distriLoading'
-        ])
     };
 </script>
 <style lang="scss">

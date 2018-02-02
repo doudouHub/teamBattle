@@ -14,7 +14,7 @@
     import vHead from './Header.vue';
     import vSidebar from './Sidebar.vue';
     import config from '../../../config.js'
-    import {mapGetters, mapActions} from 'vuex'
+    import {mapState} from 'vuex'
 
     export default {
         components: {

@@ -41,10 +41,8 @@
                 websocket.send(JSON.stringify(sendMsg).toString(2));
             };
             // websocket接收消息
-            websocket.onmessage = (evt) => {
+            websocket.onmessage = evt => {
                 let res = JSON.parse(evt.data);
-                // console.log(res);
-
                 switch (res.code) {
                     case 'connected':
                         // 建立关系成功
@@ -54,6 +52,10 @@
                             // console.log("连接检测_5s");
                             websocket.send(0);
                         }, 5000);
+                        break;
+                    case 'deliver':
+                        // 对战题目发送成功，结束等待状态
+                        self.$store.dispatch('teacher/viewBattle');
                         break;
                     case 'error':
                         // socket报错

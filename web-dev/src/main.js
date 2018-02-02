@@ -26,33 +26,69 @@ const vm = new Vue({
  * cbl 自定义0时的回调
  * err 报错回调
  **/
-Vue.prototype.$http = function (url, formData, cb, cbl, err) {
-    axios.post(config.host + url, formData)
+Vue.prototype.$http = function (type, url, formData, cb, cbl, err, that) {
+    // 当存在某些特定参数，独处理赋值
+    // if (formData.key) {
+    //     // 如果参数中需要传递key
+    //     formData.safetime = (new Date()).valueOf();
+    //     formData.safeid = this.userId;
+    //     formData.key = md5(this.userId + formData.safetime + 'jevictek.homework');
+    // }
+    // if (formData.userId) {
+    //     formData.userId = this.userId;
+    // }
+    // if (formData.userid) {
+    //     formData.userid = this.userId;
+    // }
+    // if (formData.teacherId) {
+    //     formData.teacherId = this.userId;
+    // }
+
+    let CancelToken = axios.CancelToken;
+    axios.request({
+        baseURL: config.host,
+        url: url,
+        method: type,
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+        params: formData,
+        data: formData,
+        timeout: 60000,
+        responseType: 'json',
+        cancelToken: new CancelToken(function executor(c) {
+            // executor 函数接收一个 cancel 函数作为参数
+            try {
+                that.cancelToken = c;
+            } catch (err) {
+            }
+        })
+    })
         .then(function (res) {
-            console.log(res, '获取到数据啦');
+            // console.log(res, '请求返回');
+            if (process.env.NODE_ENV === 'development') {
+                cb(res.data)
+                return;
+            }
             let code = Number(res.data.code);
             switch (code) {
                 case 0:
-                    try {
-                        cbl(res.data.msg);
-                    } catch (err) {
-                        vm.$message.error(res.data.msg);
-                    }
+
                     break;
                 case 1:
-                    // 数据返回正确回调
-                    let _data = res.data.data;
-                    if ((typeof _data == 'string') && _data.constructor == String) {
-                        try {
-                            _data = JSON.parse(_data);
-                        } catch (err) {
-                            // console.log(err)
+                    if (code === -4004) {
+                        // 未转换成功
+                        cb(res.data)
+                    } else {
+                        // 数据返回正确回调
+                        var _data = res.data.data;
+                        if ((typeof _data == 'string') && _data.constructor == String) {
+                            try {
+                                _data = JSON.parse(_data);
+                            } catch (err) {
+                                // console.log(err)
+                            }
                         }
+                        cb(_data, res.data.msg);
                     }
-                    cb(_data, res.data.msg);
-                    break;
-                case 2:
-                    vm.$router.push('Login');
                     break;
             }
         })
@@ -60,7 +96,7 @@ Vue.prototype.$http = function (url, formData, cb, cbl, err) {
             try {
                 err(error);
             } catch (_err) {
-                console.log(error, '获取失败')
+                console.log(error);
             }
         });
 };

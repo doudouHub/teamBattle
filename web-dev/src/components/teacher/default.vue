@@ -2,12 +2,18 @@
     <div>
         <!--  老师端默认  -->
         <h1>老师端默认</h1>
+        <v-question></v-question>
     </div>
 </template>
 
 <script>
+    // 题型组件
+    import vQuestion from './modules/question_view'
     export default {
-        name: "teacher"
+        name: "teacher",
+        components: {
+            vQuestion
+        },
     }
 </script>
 

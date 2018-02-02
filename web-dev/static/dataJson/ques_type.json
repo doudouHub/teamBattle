@@ -1,0 +1,15 @@
+{
+    "name": "ques_type",
+    "list": [
+        {
+            "id": 1,
+            "type":"arithmetic",
+            "title": "算术题"
+        },
+        {
+            "id": 2,
+            "type":"interact_battle",
+            "title": "对战问答"
+        }
+    ]
+}
