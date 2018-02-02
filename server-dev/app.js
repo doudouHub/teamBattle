@@ -26,19 +26,19 @@
 
     /***
      * 向客户端广播消息
-     * client_uuid 客户端连接id数组
+     * to 客户端发送对象连接id数组
      * data 传递的数据
      **/
-    var wsSend = function (client_uuid, data) {
+    var wsSend = function (to, data) {
         var clientSocket = null;
         data = (typeof data === 'string') ? data : JSON.stringify(data);
 
         // try {
-        if (typeof client_uuid === 'object') {
-            if (!isNaN(client_uuid.length)) {
+        if (typeof to === 'object') {
+            if (!isNaN(to.length)) {
                 // 当id类型为数组，表示向特定客户端传播信息
-                for (var i = 0; i < client_uuid.length; i++) {
-                    clientSocket = clients[client_uuid[i]].ws;
+                for (var i = 0; i < to.length; i++) {
+                    clientSocket = clients[to[i]].ws;
                     if (clientSocket.readyState === WebSocket.OPEN) {
                         clientSocket.send(data);
                     }
@@ -55,7 +55,7 @@
         }
         else {
             // 当id类型为字符串，表示向单一客户端传播信息
-            clientSocket = clients[client_uuid].ws;
+            clientSocket = clients[to].ws;
             if (clientSocket.readyState === WebSocket.OPEN) {
                 clientSocket.send(data);
             }
