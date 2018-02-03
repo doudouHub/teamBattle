@@ -1,6 +1,18 @@
 import Vue from 'vue';
+import * as types from './mutation-types'
+import {router} from '../router/index'
 
 export const mutations = {
+    [types.USER_LOGIN](state, data) {
+        state.userInfo = {
+            id: data.id,
+            name: data.name
+        };
+
+        if (data.loginToPath === '/') return;
+        router.push('/' + data.loginToPath + '?userid=' + data.id + '&username=' + data.name);
+    },
+
     // 显示接收题目弹窗
     showQuesModal(state, data) {
         state.quesData = data;

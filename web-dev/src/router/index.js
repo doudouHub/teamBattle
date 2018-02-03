@@ -26,14 +26,14 @@ export const router = new Router({
                 {
                     path: '/',
                     meta: {
-                        title: '教师端'
+                        title: '教师端首页'
                     },
                     component: resolve => require(['../components/teacher/default.vue'], resolve),
                 },
                 {
                     path: '/viewBattle',
                     meta: {
-                        title: '教师端'
+                        title: '教师端对战榜'
                     },
                     component: resolve => require(['../components/teacher/modules/battle_list_view.vue'], resolve),
                 }
@@ -48,9 +48,15 @@ export const router = new Router({
             children: [
                 {
                     path: '/',
+                    meta: {
+                        title: '学生端首页'
+                    },
                     component: resolve => require(['../components/student/default.vue'], resolve),
                 },
                 {
+                    meta: {
+                        title: '学生端对战界面'
+                    },
                     path: '/battle',
                     component: resolve => require(['../components/student/modules/battle.vue'], resolve),
                 }

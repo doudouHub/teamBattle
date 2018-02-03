@@ -1,1 +1,1 @@
-// export const SOME_MUTATION = 'SOME_MUTATION'
+export const USER_LOGIN = 'USER_LOGIN'

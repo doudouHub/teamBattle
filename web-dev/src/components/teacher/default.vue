@@ -1,7 +1,7 @@
 <template>
     <div>
-        <!--  老师端默认  -->
-        <h1>老师端默认</h1>
+        <!--  老师端首页  -->
+        <h1>老师端首页</h1>
         <v-question></v-question>
     </div>
 </template>

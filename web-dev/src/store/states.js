@@ -1,7 +1,7 @@
 export const state = {
-    user: {
-        id: Math.random(),
-        name: Math.random().toString(36).substr(2)
+    userInfo: {
+        id: '',
+        name:''
     },
     // 题目列表
     quesData: {
