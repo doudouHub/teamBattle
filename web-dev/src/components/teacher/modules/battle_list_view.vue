@@ -10,7 +10,7 @@
             <div class="battle-content">
                 <ul class="battle-rank-list list-none">
                     <li class="item" v-for="item in rankList" :key="item.userId">
-                        <div class="item-name pull-left">{{item.userName}}</div>
+                        <div class="item-name pull-left">{{item.name}}</div>
                         <div class="item-score pull-right">{{item.score}}</div>
                     </li>
                 </ul>

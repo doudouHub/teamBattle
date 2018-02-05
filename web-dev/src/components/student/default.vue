@@ -2,8 +2,7 @@
     <div>
         <!--  学生端首页  -->
         <h1>学生端首页</h1>
-        <!--  互动对战已经开启  -->
-        <el-button type="primary" :loading="matchLoading" @click="matchAgainst">
+        <el-button type="primary" :disabled="!battle_statu" :loading="matchLoading" @click="matchAgainst">
             <span v-if="!matchLoading">匹配对战</span>
             <span v-else>正在匹配...</span>
         </el-button>
@@ -21,8 +20,9 @@
             }
         },
         computed: {
-            ...mapState('student', [
-                'userInfo'
+            ...mapState([
+                'userInfo',
+                'battle_statu'
             ])
         },
         mounted() {
@@ -34,10 +34,7 @@
                 const self = this;
 
                 // 发送请求匹配信息
-                websocket.send(JSON.stringify({
-                    type: 'matching',
-                    userId: self.$route.query.userid
-                }));
+                websocket.send(JSON.stringify({type: 'matching'}));
                 this.matchLoading = true;
             },
         }

@@ -8,10 +8,10 @@
         <el-dialog title="登陆" :visible.sync="dialogFormVisible" width="480px" center>
             <el-form :model="formData" :rules="rules" ref="formData" :label-width="formLabelWidth">
                 <el-form-item label="用户ID" prop="id">
-                    <el-input v-model="formData.id"></el-input>
+                    <el-input v-model="formData.id" autofocus></el-input>
                 </el-form-item>
                 <el-form-item label="账户" prop="name">
-                    <el-input v-model="formData.name"></el-input>
+                    <el-input v-model="formData.name" @keyup.enter.native="loginToClient('formData')"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -40,7 +40,7 @@
                 },
                 formLabelWidth: '70px',
                 // 登陆的账户端
-                loginToPath: ''
+                account_type: ''
             }
         },
         methods: {
@@ -48,18 +48,22 @@
             openToLogin(client) {
                 const self = this;
                 this.dialogFormVisible = true;
-                this.loginToPath = client;
+                this.account_type = client;
             },
             // 登陆到对应界面
             loginToClient(formName) {
                 const self = this;
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.$store.dispatch('loginTo', {
-                            id: self[formName].id,
-                            name: self[formName].name,
-                            loginToPath: self.loginToPath
-                        });
+                        let _data = {
+                            id: this[formName].id,
+                            name: this[formName].name,
+                            account_type: this.account_type
+                        };
+                        // 存储会话数据
+                        this.$sessionSave.set('userInfo', _data);
+                        this.$store.dispatch('loginTo', _data);
+                        this.$router.push('/' + this.account_type);
                     } else {
                         console.log('error submit!!');
                         return false;

@@ -1,7 +1,21 @@
 @import "normalize";
 @import "animate/animate";
 
+html, body {
+    color       : #333;
+    font-size   : 16px;
+    font-family : 'Microsoft YaHei', Helvetica, Verdana, Arial, sans-serif;
+}
+
+* {
+    -webkit-box-sizing          : border-box;
+    -moz-box-sizing             : border-box;
+    box-sizing                  : border-box;
+    -webkit-tap-highlight-color : rgba(0, 0, 0, 0);
+}
+
 .list-none {
+    padding    : 0;
     list-style : none;
 }
 
@@ -15,4 +29,27 @@
 
 .pull-right {
     float : right;
+}
+
+.dis-table {
+    display : table;
+    &.ver-mid {
+        .dis-tab-cell {
+            vertical-align : middle;
+        }
+    }
+}
+
+.dis-tab-cell {
+    display : table-cell;
+}
+
+/* 禁止鼠标选中文本 */
+.noselect {
+    -webkit-touch-callout : none; /* iOS Safari */
+    -webkit-user-select   : none; /* Chrome/Safari/Opera */
+    -khtml-user-select    : none; /* Konqueror */
+    -moz-user-select      : none; /* Firefox */
+    -ms-user-select       : none; /* Internet Explorer/Edge */
+    user-select           : none;
 }

@@ -58,7 +58,10 @@
             ...mapState('teacher', [
                 'quesData',
                 'distriLoading'
-            ])
+            ]),
+            ques_type_select_name() {
+                return this.ques_type_list.filter(obj => obj.id === this.ques_type_selectid)[0].type
+            }
         },
         mounted() {
             const self = this;
@@ -75,12 +78,12 @@
                 websocket.send(JSON.stringify({
                     type: 'distribute', // 分发题目
                     data: {
-                        time: 120, // 答题时间
-                        type: self.ques_type_selectid,
-                        quesData: self.ques_list_selectid.join(',')
+                        // 题目类型
+                        ques_type: self.ques_type_select_name,
+                        // TODO: 需要传递更多题型参数...
                     }
                 }));
-                this.$store.dispatch('teacher/distriForLoading');
+                this.$store.dispatch('teacher/distriForLoading', true);
             },
             // 获得对应题型内容
             getQues(index) {

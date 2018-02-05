@@ -31,7 +31,7 @@ export const router = new Router({
                     component: resolve => require(['../components/teacher/default.vue'], resolve),
                 },
                 {
-                    path: '/viewBattle',
+                    path: 'viewBattle',
                     meta: {
                         title: '教师端对战榜'
                     },
@@ -57,33 +57,13 @@ export const router = new Router({
                     meta: {
                         title: '学生端对战界面'
                     },
-                    path: '/battle',
+                    path: 'battle',
                     component: resolve => require(['../components/student/modules/battle.vue'], resolve),
                 }
             ]
         },
         // 路由错误，404page
         {path: '*', component: resolve => require(['../components/page/page404.vue'], resolve)},
-
-
-        {
-            path: '/home',
-            component: resolve => require(['../components/common/Home.vue'], resolve),
-            children: [
-                {
-                    path: '/tea',
-                    component: resolve => require(['../components/page/QSDistribution.vue'], resolve),
-                },
-                {
-                    path: '/stu',
-                    component: resolve => require(['../components/page/QSAccept.vue'], resolve)
-                },
-                {
-                    path: '/viewBattle',
-                    component: resolve => require(['../components/page/viewBattle.vue'], resolve),
-                }
-            ]
-        },
     ]
 })
 

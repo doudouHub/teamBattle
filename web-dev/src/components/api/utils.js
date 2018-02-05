@@ -90,7 +90,7 @@ Vue.prototype.$http = function (type, url, formData, cb, cbl, err, that) {
             }
         });
 };
-// 缓存读取操作
+// 离线缓存读取操作
 Vue.prototype.$localSave = {
     get: function (key) {
         let data = localStorage.getItem(key);
@@ -105,7 +105,23 @@ Vue.prototype.$localSave = {
         val = JSON.stringify(val);
         localStorage.setItem(key, val)
     }
-}
+};
+// 会话缓存读取操作
+Vue.prototype.$sessionSave = {
+    get: function (key) {
+        let data = sessionStorage.getItem(key);
+        try {
+            data = JSON.parse(sessionStorage.getItem(key));
+        } catch (err) {
+            // console.log(err)
+        }
+        return data;
+    },
+    set: function (key, val) {
+        val = JSON.stringify(val);
+        sessionStorage.setItem(key, val)
+    }
+};
 // cookie存取操作
 Vue.prototype.$cookieSave = {
     // 设置cookies

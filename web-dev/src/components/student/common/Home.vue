@@ -1,5 +1,6 @@
 <template>
     <div class="wrapper">
+        <monitor-window></monitor-window>
         <v-head></v-head>
         <v-sidebar></v-sidebar>
         <div class="content">
@@ -12,6 +13,7 @@
 
 <script>
     import '../../../assets/scripts/websoket'
+    import monitorWindow from '../../common/Monitor_window';
     import vHead from './Header.vue';
     import vSidebar from './Sidebar.vue';
     import config from '../../../config.js'
@@ -19,7 +21,7 @@
 
     export default {
         components: {
-            vHead, vSidebar
+            vHead, vSidebar,monitorWindow
         },
         data() {
             return {}

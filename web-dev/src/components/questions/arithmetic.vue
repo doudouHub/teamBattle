@@ -71,7 +71,7 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
+    import {mapState} from 'vuex'
 
     const quesOptions = [
         {
@@ -108,6 +108,9 @@
     export default {
         data() {
             return {
+                quesData: {
+                    time: 120
+                },
                 battle_time: {
                     min: '00',
                     sec: '00'
@@ -121,10 +124,8 @@
             }
         },
         computed: {
-            ...mapGetters([
-                'quesData',
+            ...mapState('student', [
                 'matching',
-                'user',
                 'otherChecks'
             ])
         },
@@ -135,7 +136,11 @@
             for (let i = 0; i < quesOptions.length; i++) {
                 otherAnswerList.push({id: i})
             }
-            this.$store.commit('updateAnswering', otherAnswerList);
+            // 初始化对战
+            this.$store.commit('updateMatching', {
+                type: 'battle_init',
+                data: otherAnswerList
+            });
             this.battleStart();
         },
         methods: {
@@ -191,7 +196,7 @@
                 websocket.send(JSON.stringify({
                     type: 'result',
                     data: {
-                        userId: self.$route.query.userid,
+                        userId: self.$store.state.userInfo.id,
                         index: index,
                         check: check
                     }

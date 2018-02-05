@@ -141,16 +141,16 @@
                                     wsSend(matchedClients[i], {
                                         "code": 'matched',
                                         "data": {
-                                            userId: clients[clients[matchedClients[i]].matchTo].userId,
-                                            userName: clients[matchedClients[i]].matchName
+                                            id: clients[clients[matchedClients[i]].matchTo].userId,
+                                            name: clients[matchedClients[i]].matchName
                                         }
                                     });
                                     // 向主客户端发送对战成员信息
                                     wsSend(clients[matchedClients[i]].pub_client, {
                                         "code": 'matched_mem',
                                         "data": {
-                                            userId: clients[matchedClients[i]].userId,
-                                            userName: clients[matchedClients[i]].userName,
+                                            id: clients[matchedClients[i]].userId,
+                                            name: clients[matchedClients[i]].userName,
                                             score: 0
                                         }
                                     });
@@ -159,7 +159,7 @@
                                 matchingClients.push(client_uuid);
                             }
                         } catch (err) {
-                            throw new Error("报错信息2：" + err)
+                            conole.log('报错信息2' + err)
                         }
                         break;
                     case 'result':
@@ -233,9 +233,9 @@
             var names = '';
             for (var key in clients) {
                 if (names === '') {
-                    names = clients[key].userName;
+                    names = '{name:' + clients[key].userName + ',client_id:' + key + '}';
                 } else {
-                    names = clients[key].userName + ', ' + names;
+                    names = '{name:' + clients[key].userName + ',client_id:' + key + '}, ' + names;
                 }
             }
             console.group('连接客户端用户：');

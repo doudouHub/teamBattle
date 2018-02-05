@@ -1,8 +1,8 @@
 import * as types from './mutation-types'
 
-export const distriForLoading = ({ commit }) => {
+export const distriForLoading = ({commit}) => {
     commit(types.DISTRI_LOADING)
 }
-export const viewBattle = ({ commit }) => {
-    commit(types.VIEW_BATTLE);
+export const viewBattle = ({dispatch, commit, rootState}) => {
+    commit(types.VIEW_BATTLE, rootState.userInfo.account_type);
 }

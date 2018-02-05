@@ -3,12 +3,12 @@
     "list": [
         {
             "id": 1,
-            "type":"arithmetic",
+            "type":"vArithmetic",
             "title": "算术题"
         },
         {
             "id": 2,
-            "type":"interact_battle",
+            "type":"QABattle",
             "title": "对战问答"
         }
     ]

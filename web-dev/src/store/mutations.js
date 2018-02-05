@@ -3,21 +3,20 @@ import * as types from './mutation-types'
 import {router} from '../router/index'
 
 export const mutations = {
+    // 用户登陆信息更新
     [types.USER_LOGIN](state, data) {
-        state.userInfo = {
-            id: data.id,
-            name: data.name
-        };
-
-        if (data.loginToPath === '/') return;
-        router.push('/' + data.loginToPath + '?userid=' + data.id + '&username=' + data.name);
+        state.userInfo = data;
+    },
+    // 更新用户对战状态
+    [types.UPADATE_BATTLE_STATU](state, data) {
+        state.battle_statu = data.statu;
+        state.ques_type = data.ques_type;
+    },
+    // 更新WEBSOCKET状态
+    [types.UPDATE_WEBSOCKET_STATU](state, data) {
+        state.websocket_statu = data;
     },
 
-    // 显示接收题目弹窗
-    showQuesModal(state, data) {
-        state.quesData = data;
-        state.distriLoading = false;
-    },
     // 显示发加载动画
     showDistriLoading(state, self) {
         state.distriLoading = true;
@@ -31,16 +30,16 @@ export const mutations = {
     addBattleRankings(state, data) {
         state.rankList.push(data);
     },
-    // 更新作答信息
-    updateAnswering(state, data) {
-        // console.log(state.otherChecks);
-        if (data.length) {
-            state.otherChecks = data;
-        } else {
-            Vue.set(state.otherChecks[data.index], 'check', data.check);
-            Vue.set(state.otherChecks[data.index], 'confirm', true);
-        }
-    },
+    // // 更新作答信息
+    // updateAnswering(state, data) {
+    //     // console.log(state.otherChecks);
+    //     if (data.length) {
+    //         state.otherChecks = data;
+    //     } else {
+    //         Vue.set(state.otherChecks[data.index], 'check', data.check);
+    //         Vue.set(state.otherChecks[data.index], 'confirm', true);
+    //     }
+    // },
     // 更新排名信息
     updateBattleRankings(state, data) {
         // console.log(data)

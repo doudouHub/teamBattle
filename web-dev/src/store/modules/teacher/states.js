@@ -7,4 +7,5 @@ export const state = {
         time: 120,
         data: ''
     },
+    battleList:[]
 };
