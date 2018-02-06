@@ -9,6 +9,7 @@
 <script>
     // 题型组件
     import vQuestion from './modules/question_view'
+
     export default {
         name: "teacher",
         components: {

@@ -71,7 +71,7 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex'
+    import {mapState, mapGetters} from 'vuex'
 
     export default {
         data() {
@@ -94,15 +94,15 @@
         computed: {
             ...mapState('student', [
                 'matching',
-                'otherChecks',
-                'otherIsReady'
+                'otherChecks'
+            ]),
+            ...mapGetters('student', [
+                'allReadyStart'
             ])
         },
         watch: {
-            otherIsReady(val) {
-                console.log(val);
-                // TODO:在确认对方题型已经加载完毕，执行竞赛开始
-                console.log('对方题型已经加载完毕');
+            allReadyStart(val) {
+                // 确认对方题型已经加载完毕,并且已经过完倒计时，执行竞赛开始
                 this.battleStart();
             }
         },

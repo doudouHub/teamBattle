@@ -16,6 +16,10 @@ export default {
                 // 对方准备就绪
                 state.otherIsReady = true;
                 break;
+            case 'count_over':
+                // 倒计时结束
+                state.count_over = true;
+                break;
             case 'matched':
                 // 匹配人员成功
                 state.matching.push(data.data);

@@ -1,5 +1,13 @@
 <template>
     <div>
+        <!--  倒计时组件  -->
+        <v-countdown
+            :count_time="count_time"
+            end_text="Go!"
+            :end_close="true"
+            v-if="$store.state.student.otherIsReady">
+        </v-countdown>
+
         <!--  对战面板  -->
         <br>
         <h2 class="text-center"
@@ -21,11 +29,19 @@
     import {mapState} from 'vuex'
     // 对战题型模板
     import {battleTpl} from '../../../config'
+    // 引入倒计时组件
+    import vCountdown from '../../common/Count_down'
 
     export default {
-        components: battleTpl,
+        components: {
+            vCountdown,
+            ...battleTpl
+        },
         data() {
-            return {}
+            return {
+                // 准备倒计时
+                count_time: 5
+            }
         },
         computed: {
             ...mapState([
@@ -35,8 +51,8 @@
         },
         mounted() {
             // 如果当前对战状态未开始,返回学生端首页
-            if(!this.battle_statu){
-                this.$router.push({path:'/student'})
+            if (!this.battle_statu) {
+                this.$router.push({path: '/student'})
             }
         },
         methods: {
