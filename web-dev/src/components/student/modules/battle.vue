@@ -3,7 +3,7 @@
         <!--  对战面板  -->
         <br>
         <h2 class="text-center"
-            v-loading.fullscreen.lock="!$store.state.student.otherIsReady"
+            v-loading.fullscreen.lock="battle_statu && !$store.state.student.otherIsReady"
             element-loading-text="等待对方准备就绪...">
             对战面板
         </h2>
@@ -29,11 +29,15 @@
         },
         computed: {
             ...mapState([
-                'ques_type'
+                'ques_type',
+                'battle_statu'
             ])
         },
         mounted() {
-
+            // 如果当前对战状态未开始,返回学生端首页
+            if(!this.battle_statu){
+                this.$router.push({path:'/student'})
+            }
         },
         methods: {
             // 对战开始

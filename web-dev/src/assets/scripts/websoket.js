@@ -93,6 +93,8 @@ let wsInit = userInfo => {
     websocket.onclose = () => {
         clearInterval(websocketTimer);
         console.warn('ws连接断开');
+        store.commit('UPDATE_WEBSOCKET_STATU', false);
+        store.commit('UPADATE_BATTLE_STATU', false);
         // websocket = new WebSocket(config.scoket);
     };
 };

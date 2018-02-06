@@ -27,12 +27,16 @@
             return {}
         },
         computed: {
-            ...mapGetters('teacher',[
+            ...mapGetters('teacher', [
                 'rankingList'
             ]),
         },
         methods: {},
         mounted() {
+            // 如果当前对战状态未开始,返回老师端首页
+            if (!this.$store.state.battle_statu) {
+                this.$router.push({path: '/teacher'})
+            }
         }
     }
 </script>
