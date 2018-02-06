@@ -12,6 +12,10 @@ export default {
                     state.otherChecks.push({id: i})
                 }
                 break;
+            case 'ready':
+                // 对方准备就绪
+                state.otherIsReady = true;
+                break;
             case 'matched':
                 // 匹配人员成功
                 state.matching.push(data.data);
@@ -28,4 +32,5 @@ export default {
                 break;
         }
     },
+
 }

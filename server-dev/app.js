@@ -162,6 +162,10 @@
                             conole.log('报错信息2' + err)
                         }
                         break;
+                    case 'battle_isReady':
+                        // 通知匹配人员准备就绪
+                        wsSend(clients[client_uuid].matchTo, {"code": 'battle_isReady'});
+                        break;
                     case 'result':
                         // 传递实时对战结果
                         wsSend(clients[client_uuid].matchTo, {

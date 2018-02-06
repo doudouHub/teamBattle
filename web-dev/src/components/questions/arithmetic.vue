@@ -94,15 +94,29 @@
         computed: {
             ...mapState('student', [
                 'matching',
-                'otherChecks'
+                'otherChecks',
+                'otherIsReady'
             ])
+        },
+        watch: {
+            otherIsReady(val) {
+                console.log(val);
+                // TODO:在确认对方题型已经加载完毕，执行竞赛开始
+                console.log('对方题型已经加载完毕');
+                this.battleStart();
+            }
         },
         mounted() {
             const self = this;
             // 获得对应题型内容
             this.$http('GET', false, './static/dataJson/vArithmetic.json', {}, (data) => {
                 self.ques_list = data.list;
-                self.battleStart();
+                // 通知对方已经准备就绪
+                websocket.send(JSON.stringify({type: 'battle_isReady'}));
+                if (self.otherIsReady) {
+                    // 如果对方已经准备好，直接开始
+                    self.battleStart();
+                }
             })
         },
         methods: {

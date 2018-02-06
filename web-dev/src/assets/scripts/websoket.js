@@ -61,6 +61,10 @@ let wsInit = userInfo => {
                     data: res.data
                 });
                 break;
+            case 'battle_isReady':
+                console.log('准备就绪')
+                store.dispatch('student/updateMatching', {type: 'ready'});
+                break;
             case 'update_result':
                 // 接收对方的答案 - 对学生
                 store.dispatch('student/updateMatching', {

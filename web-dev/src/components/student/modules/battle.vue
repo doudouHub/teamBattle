@@ -2,7 +2,11 @@
     <div>
         <!--  对战面板  -->
         <br>
-        <h2 class="text-center">对战面板</h2>
+        <h2 class="text-center"
+            v-loading.fullscreen.lock="!$store.state.student.otherIsReady"
+            element-loading-text="等待对方准备就绪...">
+            对战面板
+        </h2>
 
         <keep-alive>
             <!-- 对战面板: 加载不同题型组件 -->
@@ -21,16 +25,12 @@
     export default {
         components: battleTpl,
         data() {
-            return {
-            }
+            return {}
         },
         computed: {
             ...mapState([
                 'ques_type'
             ])
-        },
-        watch: {
-
         },
         mounted() {
 
