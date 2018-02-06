@@ -17,7 +17,7 @@
             <el-row class="battle-content">
                 <el-col :span="12" class="battle-content-left">
                     <div class="battle-box-head">
-                        {{$route.query.username}}
+                        {{$store.state.userInfo.name}}
                     </div>
                     <!--  答题区域  -->
                     <ul class="answer-box">
@@ -47,7 +47,7 @@
                 </el-col>
                 <el-col :span="12" class="battle-content-right">
                     <div class="battle-box-head">
-                        {{matching.userName}}
+                        {{matching[0].name}}
                     </div>
                     <!--  对方答题结果展示  -->
                     <ul class="answer-box">
@@ -109,7 +109,7 @@
         data() {
             return {
                 quesData: {
-                    time: 120
+                    time: 600
                 },
                 battle_time: {
                     min: '00',
@@ -131,16 +131,6 @@
         },
         mounted() {
             const self = this;
-            // 初始化对方作答区域
-            let otherAnswerList = [];
-            for (let i = 0; i < quesOptions.length; i++) {
-                otherAnswerList.push({id: i})
-            }
-            // 初始化对战
-            this.$store.commit('updateMatching', {
-                type: 'battle_init',
-                data: otherAnswerList
-            });
             this.battleStart();
         },
         methods: {

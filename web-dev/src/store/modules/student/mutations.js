@@ -6,14 +6,17 @@ export default {
     // 更新匹配信息
     [types.UPDATE_MATCHING](state, data) {
         switch (data.type) {
+            case 'battle_init':
+                console.log(data.data)
+                // 初始化对战
+                for (let i = 0; i < data.data; i++) {
+                    state.otherChecks.push({id: i})
+                }
+                break;
             case 'matched':
                 // 匹配人员成功
                 state.matching.push(data.data);
                 router.push({path: '/student/battle'});
-                break;
-            case 'battle_init':
-                // 初始化对战
-                state.otherChecks = data.data;
                 break;
             case 'answering':
                 // 更新对方作答状况

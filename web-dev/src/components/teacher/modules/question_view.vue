@@ -68,6 +68,7 @@
             // 获取题型列表
             this.$http('GET', '/static/dataJson/ques_type.json', {}, (data) => {
                 self.ques_type_list = data.list;
+                self.getQues(0);
             })
         },
         methods: {
@@ -80,6 +81,8 @@
                     data: {
                         // 题目类型
                         ques_type: self.ques_type_select_name,
+                        // 题目数量
+                        ques_length: self.ques_list.length
                         // TODO: 需要传递更多题型参数...
                     }
                 }));

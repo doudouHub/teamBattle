@@ -15,14 +15,22 @@ export default {
     },
     // 更新排行榜
     [types.UPDATE_RANKINGS](state, data) {
-        switch (data.type){
+        switch (data.type) {
             case 'member':
+                console.log(data.data);
                 // 更新人员名单
                 state.battleList.push(data.data);
                 break;
             case 'rankings':
                 // 更新排名
-
+                if (!data.data.check) return;  // 如果未得分则不处理
+                for (let i = 0; i < state.battleList.length; i++) {
+                    console.log(state.battleList[i].id, data.data.userId)
+                    if (state.battleList[i].id === data.data.userId) {
+                        state.battleList[i].score++;
+                        break;
+                    }
+                }
                 break;
         }
     },

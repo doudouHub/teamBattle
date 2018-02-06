@@ -6,3 +6,6 @@ export const distriForLoading = ({commit}) => {
 export const viewBattle = ({dispatch, commit, rootState}) => {
     commit(types.VIEW_BATTLE, rootState.userInfo.account_type);
 }
+export const updateRanking = ({commit}, data) => {
+    commit(types.UPDATE_RANKINGS, data)
+}

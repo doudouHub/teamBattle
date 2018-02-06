@@ -10,21 +10,4 @@ export const state = {
     // 对战连接状态
     websocket_statu: false,
     ques_type:'',
-
-    // 题目列表
-    quesData: {
-        statu: false,
-        time: 120,
-        data: ''
-    },
-    // 匹配信息
-    matching: {
-        statu: false,
-        userId: '',
-        userName: ''
-    },
-    // 对方的答题信息
-    otherChecks: [],
-    // 排名数组
-    rankList: [],
 }

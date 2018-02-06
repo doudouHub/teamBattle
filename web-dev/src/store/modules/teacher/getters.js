@@ -1,5 +1,8 @@
-import {state} from './states'
+import Vue from 'vue';
 
-export const rankingList=state =>{
-    // return state.battleList.sort(data.self.$sortBy('score')).reverse()
+export const rankingList = state => {
+    // let a = Vue.copyArr(state.battleList);
+    // a.sort(Vue.sortBy('score')).reverse();
+    // console.log(state.battleList)
+    return Vue.copyArr(state.battleList).sort(Vue.sortBy('score')).reverse();
 }

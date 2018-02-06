@@ -9,7 +9,7 @@
             </div>
             <div class="battle-content">
                 <ul class="battle-rank-list list-none">
-                    <li class="item" v-for="item in rankList" :key="item.userId">
+                    <li class="item" v-for="item in rankingList" :key="item.userId">
                         <div class="item-name pull-left">{{item.name}}</div>
                         <div class="item-score pull-right">{{item.score}}</div>
                     </li>
@@ -20,15 +20,15 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex'
+    import {mapGetters} from 'vuex'
 
     export default {
         data: function () {
             return {}
         },
         computed: {
-            ...mapState([
-                'rankList'
+            ...mapGetters('teacher',[
+                'rankingList'
             ]),
         },
         methods: {},

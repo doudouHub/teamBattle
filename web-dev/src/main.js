@@ -8,9 +8,10 @@ import store from 'store/index'
 // 配置文件
 import config from 'config.js'
 // 引入全局工具类api
-import './components/api/utils'
+import Utils from './components/api/utils'
 
 Vue.use(ElementUI);
+Vue.use(Utils);
 
 const vm = new Vue({
     store,

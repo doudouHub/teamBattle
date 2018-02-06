@@ -44,9 +44,14 @@ let wsInit = userInfo => {
             case 'deliver':
                 // 对战题目发送成功，查看对战榜
                 store.dispatch('teacher/viewBattle', null, {root: true});
+                // 初始化对战
+                store.dispatch('student/updateMatching', {
+                    type: 'battle_init',
+                    data: res.data.ques_length
+                });
                 store.commit('UPADATE_BATTLE_STATU', {
                     statu: true,
-                    ques_type: res.data.ques_type
+                    ques_type: res.data.ques_type,
                 });
                 break;
             case 'matched':
@@ -65,13 +70,16 @@ let wsInit = userInfo => {
                 break;
             case 'matched_mem':
                 // 添加排名成员信息
-                store.commit('addBattleRankings', res.data);
+                store.dispatch('teacher/updateRanking', {
+                    type: 'member',
+                    data: res.data
+                });
                 break;
             case 'updata_rank':
                 // 更新排名信息 - 对老师
-                store.commit('updateBattleRankings', {
-                    data: res.data,
-                    self: ''
+                store.dispatch('teacher/updateRanking', {
+                    type: 'rankings',
+                    data: res.data
                 });
                 break;
         }
