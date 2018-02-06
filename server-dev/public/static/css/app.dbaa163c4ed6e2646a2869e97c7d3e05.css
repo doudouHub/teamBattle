@@ -1,4 +1,5 @@
 
+@charset "UTF-8";
 article,
 aside,
 details,
@@ -881,7 +882,17 @@ body {
 .zoomOutUp {
   animation-name: zoomOutUp;
 }
+html, body {
+  color: #333;
+  font-size: 16px;
+  font-family: 'Microsoft YaHei', Helvetica, Verdana, Arial, sans-serif;
+}
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 .list-none {
+  padding: 0;
   list-style: none;
 }
 .text-center {
@@ -892,6 +903,29 @@ body {
 }
 .pull-right {
   float: right;
+}
+.dis-table {
+  display: table;
+}
+.dis-table.ver-mid .dis-tab-cell {
+    vertical-align: middle;
+}
+.dis-tab-cell {
+  display: table-cell;
+}
+
+/* 禁止鼠标选中文本 */
+.noselect {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
 }
 ::-webkit-scrollbar {
   width: 10px;

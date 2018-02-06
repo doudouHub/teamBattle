@@ -1,0 +1,15 @@
+{
+    "name": "ques_type",
+    "list": [
+        {
+            "id": 1,
+            "type":"vArithmetic",
+            "title": "算术题"
+        },
+        {
+            "id": 2,
+            "type":"QABattle",
+            "title": "对战问答"
+        }
+    ]
+}

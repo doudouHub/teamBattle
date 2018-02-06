@@ -7,7 +7,6 @@ export default {
     [types.UPDATE_MATCHING](state, data) {
         switch (data.type) {
             case 'battle_init':
-                console.log(data.data)
                 // 初始化对战
                 for (let i = 0; i < data.data; i++) {
                     state.otherChecks.push({id: i})

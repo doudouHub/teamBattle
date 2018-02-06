@@ -18,7 +18,7 @@ export default {
          * cbl 自定义0时的回调
          * err 报错回调
          **/
-        Vue.prototype.$http = function (type, url, formData, cb, cbl, err, that) {
+        Vue.prototype.$http = function (type, host, url, formData, cb, cbl, err, that) {
             // 当存在某些特定参数，独处理赋值
             // if (formData.key) {
             //     // 如果参数中需要传递key
@@ -38,7 +38,7 @@ export default {
 
             let CancelToken = axios.CancelToken;
             axios.request({
-                baseURL: config.host,
+                baseURL: host,
                 url: url,
                 method: type,
                 headers: {'X-Requested-With': 'XMLHttpRequest'},
@@ -56,7 +56,7 @@ export default {
             })
                 .then(function (res) {
                     // console.log(res, '请求返回');
-                    if (process.env.NODE_ENV === 'development') {
+                    if (!host) {
                         cb(res.data)
                         return;
                     }
@@ -205,7 +205,7 @@ export default {
             }
         }
         // 数组复制
-        Vue.copyArr=(arr)=> {
+        Vue.copyArr = (arr) => {
             let res = [];
             for (let i = 0; i < arr.length; i++) {
                 res.push(arr[i])

@@ -22,13 +22,13 @@
                     <!--  答题区域  -->
                     <ul class="answer-box">
                         <li class="ques-item"
-                            v-for="(item,index) in quesOptions"
+                            v-for="(item,index) in ques_list"
                             :key="item.id"
-                            :disabled="(item.confirm||battle_statu)"
                             :aria-right="item.check && (item.confirm||battle_statu)"
                             :aria-wrong="!item.check && (item.confirm||battle_statu)"
                         >
                             <el-input placeholder="请输入答案" v-model="item.fillin"
+                                      :disabled="(item.confirm||battle_statu)"
                                       @keyup.enter.native="confirmAnswer(index,item.fillin)">
                                 <template slot="prepend">{{item.content}}</template>
                                 <el-button slot="append" icon="el-icon-check"
@@ -73,38 +73,6 @@
 <script>
     import {mapState} from 'vuex'
 
-    const quesOptions = [
-        {
-            id: 1,
-            content: '1+1=',
-            answer: '2'
-        },
-        {
-            id: 2,
-            content: '2+2=',
-            answer: '4'
-        },
-        {
-            id: 3,
-            content: '3+3=',
-            answer: '6'
-        },
-        {
-            id: 4,
-            content: '4+4=',
-            answer: '8'
-        },
-        {
-            id: 5,
-            content: '5+5=',
-            answer: '10'
-        },
-        {
-            id: 6,
-            content: '6+6=',
-            answer: '12'
-        }
-    ];
     export default {
         data() {
             return {
@@ -120,7 +88,7 @@
                 battle_timer: null, // 对战计时器
                 battle_statu: false, // 对战状态 true 初始/正在对战，false 对战结束
 
-                quesOptions: quesOptions // 题目列表
+                ques_list: [] // 题目列表
             }
         },
         computed: {
@@ -131,7 +99,11 @@
         },
         mounted() {
             const self = this;
-            this.battleStart();
+            // 获得对应题型内容
+            this.$http('GET', false, './static/dataJson/vArithmetic.json', {}, (data) => {
+                self.ques_list = data.list;
+                self.battleStart();
+            })
         },
         methods: {
             // 对战开始
@@ -178,10 +150,10 @@
                 if (val == '' || val == undefined) return;
                 // console.log(val)
                 const self = this;
-                let check = (this.quesOptions[index].answer === val);
+                let check = (this.ques_list[index].answer === val);
 
-                this.$set(this.quesOptions[index], 'confirm', true);
-                this.$set(this.quesOptions[index], 'check', check);
+                this.$set(this.ques_list[index], 'confirm', true);
+                this.$set(this.ques_list[index], 'check', check);
                 // 传递最新结果展示
                 websocket.send(JSON.stringify({
                     type: 'result',
@@ -310,6 +282,9 @@
             .el-input {
                 max-width : 360px;
                 margin    : 0 auto;
+                &.is-disabled .el-input__inner {
+                    color : #333;
+                }
                 input {
                     font-size : 18px;
                 }

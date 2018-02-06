@@ -8,8 +8,13 @@
 
         <div>
             <el-radio-group v-model="ques_type_selectid">
-                <el-radio v-for="(item,index) in ques_type_list" :label="item.id" :key="item.id" border
-                          @change="getQues(index)">{{item.title}}
+                <el-radio
+                    v-for="(item,index) in ques_type_list"
+                    :label="item.id"
+                    :key="item.id"
+                    @change="getQues(index)"
+                    border>
+                    {{item.title}}
                 </el-radio>
             </el-radio-group>
         </div>
@@ -66,7 +71,7 @@
         mounted() {
             const self = this;
             // 获取题型列表
-            this.$http('GET', '/static/dataJson/ques_type.json', {}, (data) => {
+            this.$http('GET', false, './static/dataJson/ques_type.json', {}, (data) => {
                 self.ques_type_list = data.list;
                 self.getQues(0);
             })
@@ -91,7 +96,7 @@
             // 获得对应题型内容
             getQues(index) {
                 const self = this;
-                this.$http('GET', '/static/dataJson/' + this.ques_type_list[index].type + '.json', {}, (data) => {
+                this.$http('GET', false, './static/dataJson/' + this.ques_type_list[index].type + '.json', {}, (data) => {
                     self.ques_list = data.list;
                 })
             }
