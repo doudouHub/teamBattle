@@ -5,6 +5,8 @@ export const state = {
     otherChecks: [],
     // 对方准备状态
     otherIsReady:false,
+    // 对方的得分
+    otherScore:0,
     // 倒计时结束
     count_over:false
 }

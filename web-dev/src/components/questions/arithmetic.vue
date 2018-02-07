@@ -79,6 +79,8 @@
                 quesData: {
                     time: 600
                 },
+                // 我的总分
+                total_score: 0,
                 battle_time: {
                     min: '00',
                     sec: '00'
@@ -168,13 +170,16 @@
 
                 this.$set(this.ques_list[index], 'confirm', true);
                 this.$set(this.ques_list[index], 'check', check);
+                this.total_score += check ? this.ques_list[index].score : 0;
+
                 // 传递最新结果展示
                 websocket.send(JSON.stringify({
                     type: 'result',
                     data: {
                         userId: self.$store.state.userInfo.id,
                         index: index,
-                        check: check
+                        check: check,
+                        total_score: self.total_score
                     }
                 }));
             },

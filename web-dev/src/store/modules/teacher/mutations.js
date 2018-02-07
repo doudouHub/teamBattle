@@ -25,9 +25,9 @@ export default {
                 // 更新排名
                 if (!data.data.check) return;  // 如果未得分则不处理
                 for (let i = 0; i < state.battleList.length; i++) {
-                    console.log(state.battleList[i].id, data.data.userId)
+                    // console.log(state.battleList[i].id, data.data.userId)
                     if (state.battleList[i].id === data.data.userId) {
-                        state.battleList[i].score++;
+                        state.battleList[i].score = Number(data.data.total_score);
                         break;
                     }
                 }

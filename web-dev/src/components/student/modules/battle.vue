@@ -10,6 +10,9 @@
 
         <!--  对战面板  -->
         <br>
+        <br>
+        <br>
+        <br>
         <h2 class="text-center"
             v-loading.fullscreen.lock="battle_statu && !$store.state.student.otherIsReady"
             element-loading-text="等待对方准备就绪...">
@@ -40,7 +43,7 @@
         data() {
             return {
                 // 准备倒计时
-                count_time: 5
+                count_time: 3
             }
         },
         computed: {

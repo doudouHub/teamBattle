@@ -33,6 +33,7 @@ export default {
                     Vue.set(state.otherChecks[data.data.index], 'check', data.data.check);
                     Vue.set(state.otherChecks[data.data.index], 'confirm', true);
                 }
+                state.otherScore = data.data.score;
                 break;
         }
     },

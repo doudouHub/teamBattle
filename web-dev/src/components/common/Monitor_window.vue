@@ -37,5 +37,6 @@
         border           : 1px solid #333;
         border-radius    : 5px;
         line-height      : 30px;
+        z-index          : 1000;
     }
 </style>
