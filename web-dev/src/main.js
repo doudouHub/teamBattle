@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App';
 import {router} from './router';
+import VueTouch  from 'vue-touch';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 import "babel-polyfill";
@@ -12,6 +13,7 @@ import Utils from './components/api/utils'
 
 Vue.use(ElementUI);
 Vue.use(Utils);
+Vue.use(VueTouch, {name: 'v-touch'});
 
 const vm = new Vue({
     store,

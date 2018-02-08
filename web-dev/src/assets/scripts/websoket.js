@@ -62,7 +62,7 @@ let wsInit = userInfo => {
                 });
                 break;
             case 'battle_isReady':
-                console.log('准备就绪')
+                // console.log('准备就绪')
                 store.dispatch('student/updateMatching', {type: 'ready'});
                 break;
             case 'update_result':

@@ -1,7 +1,7 @@
 <!--  算术题  -->
 <template>
     <div>
-        <div class="battle-panel">
+        <div class="battle-panel vArithmetic">
             <div class="battle-head">
                 <div v-if="!battle_statu">{{battle_time.min}} : {{battle_time.sec}}</div>
                 <div class="over-title" v-else>对战结束</div>
@@ -196,7 +196,7 @@
     }
 
     /* 对战面板 */
-    .battle-panel {
+    .battle-panel.vArithmetic {
         border-radius    : 5px;
         border           : 1px solid #ddd;
         background-color : #fff;
@@ -244,78 +244,78 @@
             background-color : #fafafa;
             text-align       : center;
         }
-    }
 
-    /* 答题区域 */
-    .battle-content-left {
-        .check-statu-icon {
-            @include stretch(50%, 30px, false, false);
-            margin-top : -20px;
-        }
-    }
-
-    .battle-content-right {
-        .check-statu-icon {
-            line-height : 80px;
-        }
-    }
-
-    .answer-box {
-        margin     : 0;
-        padding    : 0;
-        list-style : none;
-        font-size  : 24px;
-        text-align : center;
-
-        .check-statu-icon {
-            font-size   : 40px;
-            font-weight : bold;
-            z-index     : 10;
-        }
-
-        .ques-item {
-            position      : relative;
-            margin        : 0;
-            line-height   : 80px;
-            height        : 80px;
-            padding       : 0 90px;
-            border-bottom : 1px solid #ddd;
-            transition    : background-color linear .2s;
-            &[disabled]:before {
-                content : '';
-                @include stretch();
-                z-index : 100;
-            }
-            &[aria-right='true'] {
-                background-color : #f0f9eb;
-                .check-statu-icon {
-                    color : #67c23a;
-                }
-            }
-            &[aria-wrong='true'] {
-                background-color : #fef0f0;
-                .check-statu-icon {
-                    color : #f56c6c;
-                }
-            }
-            .el-input {
-                max-width : 360px;
-                margin    : 0 auto;
-                &.is-disabled .el-input__inner {
-                    color : #333;
-                }
-                input {
-                    font-size : 18px;
-                }
+        /* 答题区域 */
+        .battle-content-left {
+            .check-statu-icon {
+                @include stretch(50%, 30px, false, false);
+                margin-top : -20px;
             }
         }
-        .el-input-group__prepend {
-            width            : 40%;
-            font-size        : 24px;
-            background-color : transparent;
-            border           : none;
-            text-align       : right;
-            color            : #333;
+
+        .battle-content-right {
+            .check-statu-icon {
+                line-height : 80px;
+            }
+        }
+
+        .answer-box {
+            margin     : 0;
+            padding    : 0;
+            list-style : none;
+            font-size  : 24px;
+            text-align : center;
+
+            .check-statu-icon {
+                font-size   : 40px;
+                font-weight : bold;
+                z-index     : 10;
+            }
+
+            .ques-item {
+                position      : relative;
+                margin        : 0;
+                line-height   : 80px;
+                height        : 80px;
+                padding       : 0 90px;
+                border-bottom : 1px solid #ddd;
+                transition    : background-color linear .2s;
+                &[disabled]:before {
+                    content : '';
+                    @include stretch();
+                    z-index : 100;
+                }
+                &[aria-right='true'] {
+                    background-color : #f0f9eb;
+                    .check-statu-icon {
+                        color : #67c23a;
+                    }
+                }
+                &[aria-wrong='true'] {
+                    background-color : #fef0f0;
+                    .check-statu-icon {
+                        color : #f56c6c;
+                    }
+                }
+                .el-input {
+                    max-width : 360px;
+                    margin    : 0 auto;
+                    &.is-disabled .el-input__inner {
+                        color : #333;
+                    }
+                    input {
+                        font-size : 18px;
+                    }
+                }
+            }
+            .el-input-group__prepend {
+                width            : 40%;
+                font-size        : 24px;
+                background-color : transparent;
+                border           : none;
+                text-align       : right;
+                color            : #333;
+            }
         }
     }
 </style>

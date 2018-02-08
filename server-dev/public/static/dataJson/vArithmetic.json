@@ -4,32 +4,38 @@
       {
           "id": 1,
           "content": "1+1=",
-          "answer": "2"
+          "answer": "2",
+          "score": "2"
       },
       {
           "id": 2,
           "content": "2+2=",
-          "answer": "4"
+          "answer": "4",
+          "score": "1"
       },
       {
           "id": 3,
           "content": "3+3=",
-          "answer": "6"
+          "answer": "6",
+          "score": "1"
       },
       {
           "id": 4,
           "content": "4+4=",
-          "answer": "8"
+          "answer": "8",
+          "score": "1"
       },
       {
           "id": 5,
           "content": "5+5=",
-          "answer": "10"
+          "answer": "10",
+          "score": "1"
       },
       {
           "id": 6,
           "content": "6+6=",
-          "answer": "12"
+          "answer": "12",
+          "score": "1"
       }
   ]
 }

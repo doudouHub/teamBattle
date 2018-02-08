@@ -27,6 +27,8 @@
         },
         mounted() {
             const self = this;
+            // 存储学生状态默认值
+            this.$sessionSave.set('student_state_default', this.$store.state.student);
         },
         methods: {
             // 匹配对战

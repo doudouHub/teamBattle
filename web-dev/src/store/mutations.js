@@ -16,4 +16,12 @@ export const mutations = {
     [types.UPDATE_WEBSOCKET_STATU](state, data) {
         state.websocket_statu = data;
     },
+    // 回到首页 -- data代表返回路径
+    [types.BACK_TO_HOME](state, path) {
+        router.push({path: '/' + path});
+        state.battle_statu = false;
+
+        // 获取对战默认数值并设置
+        state.student = JSON.parse(sessionStorage.getItem(path + '_state_default'))
+    }
 };

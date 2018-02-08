@@ -121,8 +121,8 @@
                     case 'matching':
                         // 发起匹配
                         try {
-                            // 如果已经匹配过则不重复匹配
-                            if (clients[client_uuid].matchTo || (client_uuid === matchingClients[0])) return;
+                            // 如果正在匹配，不加入匹配池子
+                            if (client_uuid === matchingClients[0]) return;
                             if (matchingClients.length) {
                                 // 完成匹配的一对客户端
                                 var matchedClients = [client_uuid, matchingClients[0]];

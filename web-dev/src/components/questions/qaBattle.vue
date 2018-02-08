@@ -3,10 +3,10 @@
     <div>
         <br>
         <br>
-        <div class="battle-panel">
+        <div class="battle-panel qaBattle" :class="bgBlur">
             <div class="battle-head" :data-myname="$store.state.userInfo.name" :data-othername="matching[0].name">
                 <div class="battle-score mine">{{total_score}}</div>
-                <div class="battle-score other">208</div>
+                <div class="battle-score other">{{otherScore}}</div>
                 <el-progress
                     type="circle"
                     :class="count_down_animate"
@@ -21,47 +21,72 @@
             <div class="battle-content text-center">
                 <!--  竖直分数进度  -->
                 <el-progress class="score-progress mine"
-                             :percentage="40"
+                             :percentage="total_score_progress"
                              status="exception"
                              :stroke-width="10"
                              :show-text="false"></el-progress>
                 <el-progress class="score-progress other"
-                             :percentage="80"
+                             :percentage="otherScore/full_marks_score*100"
                              :stroke-width="10"
                              :show-text="false"></el-progress>
                 <br>
-                <!--  题目标题  -->
-                <h2>{{ques_list[ques_run_index].title}}</h2>
-                <br>
-                <!--  题目选项  -->
-                <ul class="battle-options list-none noselect" :class="cur_options_select?'hasdone':''">
-                    <li v-for="(value, key) in ques_list[ques_run_index].options"
-                        :class="cur_options_select===key?(cur_check?'right':'wrong'):''"
-                        @click="confirmAnswer(key)">
-                        {{value}}
-                        <i class="el-icon-close"></i>
-                    </li>
-                </ul>
+                <transition
+                    name="fade"
+                    enter-active-class="animated bounceIn"
+                    leave-active-class="animated fadeOut"
+                >
+                    <div v-if="cur_ques_loaded">
+                        <!--  题目标题  -->
+                        <h2>{{ques_list[ques_run_index].title}}</h2>
+                        <br>
+                        <!--  题目选项 cur_options_select 个人已经做出选择后显示双方答案状态 -->
+                        <ul class="battle-options list-none noselect"
+                            :class="(cur_alluser_selected?'hasdone':'') +' '+ (cur_options_select?'hasSelect':'')">
+                            <!--  class判断：1：当前我的选择位置；2：当前我的答案对错，3：当前对方选择位置并且在我完成后一并显示；4：当前对方答案对错  -->
+                            <v-touch tag="li"
+                                     v-for="(value, key) in ques_list[ques_run_index].options"
+                                     :key="key"
+                                     :class="(cur_options_select===key?(cur_check?'right-mine':'wrong-mine'):'')+' '+(otherAnswer[ques_run_index]===key && cur_alluser_selected?(otherChecks[ques_run_index].check?'right-other':'wrong-other'):'')+' '+(ques_list[ques_run_index].answer===key && otherAnswer[ques_run_index]?'right':'')"
+                                     @tap="confirmAnswer(key)">
+                                {{value}}
+                                <i class="el-icon-close left" v-if="cur_options_select"></i>
+                                <i class="el-icon-close right" v-if="otherAnswer[ques_run_index]"></i>
+                            </v-touch>
+                        </ul>
+                    </div>
+                </transition>
             </div>
         </div>
         <br><br>
+        <battle-over :battle_over="battle_over" :myScore="total_score"></battle-over>
     </div>
 </template>
 
 <script>
     import {mapState, mapGetters} from 'vuex'
+    import battleOver from '../student/modules/battle_over'
 
     export default {
+        components: {
+            battleOver
+        },
         data() {
             return {
+                // 背景模糊
+                bgBlur: 'bgBlur',
+
                 ques_list: [{
                     title: '',
+                    answer: '',
                     options: []
                 }],
                 // 我的总分
                 total_score: 0,
+                // 题型的满分
+                full_marks_score: 1,
                 // 题目列表
                 ques_run_index: 0,
+
                 // 单题倒计时
                 count_down: 10,
                 // 单题剩余时间
@@ -74,13 +99,22 @@
                 // 当前题目选择的答案
                 cur_options_select: '',
                 // 当前题目答案的对错
-                cur_check: false
+                cur_check: false,
+                // 当前题目状态为双方已答题
+                cur_alluser_selected: false,
+                // 当前题目是否加载显示
+                cur_ques_loaded: true,
+
+                // 对战结束状态
+                battle_over: false
             }
         },
         computed: {
             ...mapState('student', [
                 'matching',
-                'otherChecks'
+                'otherChecks',
+                'otherScore',
+                'otherAnswer'
             ]),
             ...mapGetters('student', [
                 'allReadyStart'
@@ -93,11 +127,19 @@
             count_down_status() {
                 return this.count_down_percent < 50 ? 'exception' : (this.count_down_percent < 80 ? '' : 'success')
             },
+            // 我的分数进度
+            total_score_progress() {
+                return this.total_score / this.full_marks_score * 100;
+            },
         },
         watch: {
-            allReadyStart(val) {
+            allReadyStart() {
                 // 确认对方题型已经加载完毕,并且已经过完倒计时，执行竞赛开始
                 this.battleStart();
+            },
+            otherAnswer(val) {
+                // 如果手动对方提交了答案，判断我方是否答题，如果是则进行下一题
+                if (this.cur_options_select && val[this.ques_run_index] !== 'false') this.nextQuestion();
             }
         },
         mounted() {
@@ -107,6 +149,13 @@
                 self.ques_list = data.list;
                 self.count_down = data.pre_time;
                 self.count_down_left = data.pre_time;
+                // 统计总分
+                let _result = 0;
+                for (let i = 0; i < data.list.length; i++) {
+                    _result += Number(data.list[i].score);
+                }
+                self.full_marks_score = _result;
+
                 // 通知对方已经准备就绪
                 websocket.send(JSON.stringify({type: 'battle_isReady'}));
                 if (self.otherIsReady) {
@@ -119,12 +168,23 @@
             // 对战开始
             battleStart() {
                 const self = this;
+
+                // 去除背景模糊
+                this.bgBlur = '';
+                // 重置选择的答案
+                this.cur_options_select = '';
+                this.cur_alluser_selected = false;
+
                 // 对战倒计时计时器
                 this.count_down_timer = setInterval(function () {
                     // 恢复倒计时动画
                     self.count_down_animate = '';
                     self.count_down_left--;
-                    if (!self.count_down_left) {
+                    if (self.count_down_left <= 0) {
+                        // 结束计时器
+                        self.clearTimer();
+                        // 如果题目被提前结束，不在这里切换下一题
+                        if (self.cur_alluser_selected) return;
                         self.nextQuestion();
                     }
                 }, 1000);
@@ -132,32 +192,62 @@
             // 开始下一题
             nextQuestion() {
                 const self = this;
-                clearInterval(this.count_down_timer);
-                this.count_down_timer = null;
+                // 如果倒计时结束还没有做出选择，系统直接默认选错提交
+                if (!this.cur_options_select) this.confirmAnswer('false');
+                this.cur_alluser_selected = true;
+
                 setTimeout(() => {
+                    // 提前结束计时器
+                    self.clearTimer();
+
                     // 取消倒计时动画
                     self.count_down_animate = 'animate-none';
                     // 跳转到下一题
                     if (self.ques_list.length === (self.ques_run_index + 1)) {
                         self.battleOver();
                     } else {
+                        self.toggleLoading();
                         self.ques_run_index++;
                         self.count_down_left = self.count_down;
                         self.battleStart();
                     }
-                }, 1000)
+                }, 2500)
+            },
+            // 清除计时器
+            clearTimer() {
+                // 清除上一题计时器
+                if (this.count_down_timer) {
+                    clearInterval(this.count_down_timer);
+                    this.count_down_timer = null;
+                }
+            },
+            // 题目切换载入动画设置
+            toggleLoading() {
+                const self = this;
+                // 卸载就题目，500ms 后重新载入题型
+                this.cur_ques_loaded = false;
+                setTimeout(() => {
+                    self.cur_ques_loaded = true;
+                }, 300)
             },
             // 对战结束
             battleOver() {
-                const self = this;
+                this.battle_over = true;
+                // 添加背景模糊
+                this.bgBlur = 'bgBlur';
             },
             // 确认答案
             confirmAnswer(val) {
+                // 不可重复答题
+                if (this.cur_options_select) return;
+
                 const self = this;
                 let cur_question = this.ques_list[this.ques_run_index],
                     check = (cur_question.answer === val);
 
+                // 当前答案
                 this.cur_options_select = val;
+                // 当前的对错
                 this.cur_check = check;
 
                 this.$set(cur_question, 'confirm', true);
@@ -172,16 +262,18 @@
                         userId: self.$store.state.userInfo.id,
                         index: this.ques_run_index,
                         check: check,
+                        answer: val,
                         total_score: self.total_score
                     }
                 }));
+                // 当对方也已经打完题，直接进入下一题
+                if (this.otherAnswer[this.ques_run_index] && val !== 'false') this.nextQuestion();
             },
         }
     }
 </script>
 
-
-<style lang="scss" slot-scoped>
+<style lang="scss">
     @import "../../styles/mixins";
 
     html {
@@ -189,10 +281,15 @@
     }
 
     /* 对战面板 */
-    .battle-panel {
-        width     : 100%;
-        max-width : 660px;
-        margin    : 0 auto;
+    .battle-panel.qaBattle {
+        width      : 100%;
+        max-width  : 660px;
+        margin     : 0 auto;
+        transition : filter .3s;
+        &.bgBlur {
+            -webkit-filter : blur(10px);
+            filter         : blur(10px);
+        }
         .battle-head {
             position         : relative;
             text-align       : center;
@@ -282,6 +379,9 @@
                     background-color : #fff;
                     border           : 1px solid #eee;
                 }
+                .el-progress-bar__inner {
+                    transition : width .3s;
+                }
                 &.mine {
                     left        : 0;
                     margin-left : 10px;
@@ -306,51 +406,84 @@
                 cursor           : pointer;
                 transition       : transform .5s, opacity .5s, background-color .5s;
                 transition       : -webkit-transform .5s, opacity .5s, background-color .5s;
+                .el-icon-close {
+                    display     : none;
+                    position    : absolute;
+                    top         : 50%;
+                    z-index     : 100;
+                    color       : #fff;
+                    margin-top  : -9px;
+                    font-weight : bold;
+                }
+                // 我的答案错误，我的答案正确，对方的答案错误，对方的答案正确
+                &.wrong-mine, &.right-mine, &.wrong-other, &.right-other {
+                    transform         : scale3d(1.02, 1.02, 1);
+                    -webkit-transform : scale3d(1.02, 1.02, 1);
+                    opacity           : 1 !important;
+                    color             : #fff;
+                    font-weight       : bold;
+                }
+                &.wrong-mine, &.wrong-other {
+                    background-color : #f56c6c;
+                    border-color     : #f56c6c;
+                }
+                &.wrong-mine {
+                    .el-icon-close.left {
+                        display : block;
+                        left    : 20px;
+                    }
+                }
+                &.wrong-other {
+                    .el-icon-close.right {
+                        display : block;
+                        right   : 20px;
+                    }
+                }
+                &.right-mine, &.right-other {
+                    background-color : #67c23a;
+                    border-color     : #67c23a;
+                }
+                &.right-mine:before, &.right-other:after {
+                    content       : '';
+                    display       : block;
+                    position      : absolute;
+                    top           : 50%;
+                    z-index       : 100;
+                    width         : 10px;
+                    height        : 10px;
+                    border        : 3px solid #fff;
+                    border-radius : 50%;
+                    margin-top    : -8px;
+                }
+                &.right-mine:before {
+                    left : 20px;
+                }
+                &.right-other:after {
+                    right : 20px;
+                }
             }
+            // 选择后样式
             &.hasdone {
-                transform         : scale3d(.98, .98, 1);
-                -webkit-transform : scale3d(.98, .98, 1);
+                transform         : scale3d(.95, .95, 1);
+                -webkit-transform : scale3d(.95, .95, 1);
                 li {
                     opacity : .5;
-                    .el-icon-close {
-                        display     : none;
-                        @include stretch(50%, 20px, false, false);
-                        z-index     : 100;
-                        color       : #fff;
-                        margin-top  : -9px;
-                        font-weight : bold;
-                    }
-                    &.wrong, &.right {
-                        transform         : scale3d(1.02, 1.02, 1);
-                        -webkit-transform : scale3d(1.02, 1.02, 1);
+                    // 正确答案
+                    &.right {
+                        transform         : scale3d(1.06, 1.06, 1);
+                        -webkit-transform : scale3d(1.06, 1.06, 1);
                         opacity           : 1;
                         color             : #fff;
                         font-weight       : bold;
-                    }
-                    &.wrong {
-                        background-color : #f56c6c;
-                        border-color     : #f56c6c;
-                        .el-icon-close {
-                            display : block;
-                        }
-                    }
-                    &.right {
-                        background-color : #67c23a;
-                        border-color     : #67c23a;
-                        &:before {
-                            content       : '';
-                            display       : block;
-                            @include stretch(50%, false, false, 20px);
-                            z-index       : 100;
-                            width         : 10px;
-                            height        : 10px;
-                            border        : 3px solid #fff;
-                            border-radius : 50%;
-                            margin-top    : -8px;
-                        }
+                        background-color  : #67c23a;
+                        border-color      : #67c23a;
                     }
                 }
-
+            }
+            &.hasSelect {
+                li {
+                    cursor : default;
+                }
             }
         }
     }
