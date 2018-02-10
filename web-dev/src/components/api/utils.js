@@ -6,6 +6,10 @@ import Vue from 'vue';
 import axios from 'axios';
 import config from "../../config";
 
+// 提供C++调用
+window.executePdu = () => {
+
+};
 export default {
     install: function (Vue, options) {
         Vue.prototype.$axios = axios;
