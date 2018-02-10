@@ -23,7 +23,7 @@ export default {
                 break;
             case 'rankings':
                 // 更新排名
-                if (!data.data.check) return;  // 如果未得分则不处理
+                // if (!data.data.check) return;  // 如果未得分则不处理
                 for (let i = 0; i < state.battleList.length; i++) {
                     // console.log(state.battleList[i].id, data.data.userId)
                     if (state.battleList[i].id === data.data.userId) {

@@ -10,6 +10,11 @@
             "id": 2,
             "type":"QABattle",
             "title": "对战问答"
+        },
+        {
+            "id": 3,
+            "type":"breakBrick",
+            "title": "打砖块"
         }
     ]
 }

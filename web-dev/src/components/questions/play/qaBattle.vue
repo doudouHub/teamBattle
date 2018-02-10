@@ -1,9 +1,10 @@
 <!--  对战问答  -->
 <template>
     <div>
-        <br>
-        <br>
         <div class="battle-panel qaBattle" :class="bgBlur">
+            <h2 class="text-center">对战面板</h2>
+            <br>
+            <br>
             <div class="battle-head" :data-myname="$store.state.userInfo.name" :data-othername="matching[0].name">
                 <div class="battle-score mine">{{total_score}}</div>
                 <div class="battle-score other">{{otherScore}}</div>
@@ -64,7 +65,7 @@
 
 <script>
     import {mapState, mapGetters} from 'vuex'
-    import battleOver from '../student/modules/battle_over'
+    import battleOver from '../../student/modules/battle_over'
 
     export default {
         components: {
@@ -274,7 +275,7 @@
 </script>
 
 <style lang="scss">
-    @import "../../styles/mixins";
+    @import "../../../styles/mixins";
 
     html {
         background-color : #f4f4f4;

@@ -1,9 +1,10 @@
 <!--  算术题  -->
 <template>
     <div>
-        <div class="battle-panel vArithmetic">
+        <h2 class="text-center">算术题</h2>
+        <div class="battle-panel vArithmetic" :class="bgBlur">
             <div class="battle-head">
-                <div v-if="!battle_statu">{{battle_time.min}} : {{battle_time.sec}}</div>
+                <div v-if="!battle_over">{{battle_time.min}} : {{battle_time.sec}}</div>
                 <div class="over-title" v-else>对战结束</div>
                 <!--  倒计时进度条  -->
                 <el-progress
@@ -24,24 +25,24 @@
                         <li class="ques-item"
                             v-for="(item,index) in ques_list"
                             :key="item.id"
-                            :aria-right="item.check && (item.confirm||battle_statu)"
-                            :aria-wrong="!item.check && (item.confirm||battle_statu)"
+                            :aria-right="item.check && (item.confirm||battle_over)"
+                            :aria-wrong="!item.check && (item.confirm||battle_over)"
                         >
                             <el-input placeholder="请输入答案" v-model="item.fillin"
-                                      :disabled="(item.confirm||battle_statu)"
+                                      :disabled="(item.confirm||battle_over)"
                                       @keyup.enter.native="confirmAnswer(index,item.fillin)">
                                 <template slot="prepend">{{item.content}}</template>
                                 <el-button slot="append" icon="el-icon-check"
                                            @click="confirmAnswer(index,item.fillin)"
-                                           v-if="!item.confirm && !battle_statu">
+                                           v-if="!item.confirm && !battle_over">
                                     确认
                                 </el-button>
-                                <template slot="prepend" v-if="battle_statu">{{item.answer}}</template>
+                                <template slot="prepend" v-if="battle_over">{{item.answer}}</template>
                             </el-input>
                             <i class="check-statu-icon el-icon-check animated fadeInRight"
-                               v-if="item.check && (item.confirm||battle_statu)"></i>
+                               v-if="item.check && (item.confirm||battle_over)"></i>
                             <i class="check-statu-icon el-icon-close animated fadeInRight"
-                               v-if="!item.check && (item.confirm||battle_statu)"></i>
+                               v-if="!item.check && (item.confirm||battle_over)"></i>
                         </li>
                     </ul>
                 </el-col>
@@ -54,31 +55,37 @@
                         <li class="ques-item"
                             v-for="item in otherChecks"
                             :key="item.id"
-                            :aria-right="item.check && (item.confirm||battle_statu)"
-                            :aria-wrong="!item.check && (item.confirm||battle_statu)"
+                            :aria-right="item.check && (item.confirm||battle_over)"
+                            :aria-wrong="!item.check && (item.confirm||battle_over)"
                         >
                             <i class="check-statu-icon el-icon-check animated fadeInRight"
-                               v-if="item.check && (item.confirm||battle_statu)"></i>
+                               v-if="item.check && (item.confirm||battle_over)"></i>
                             <i class="check-statu-icon el-icon-close animated fadeInRight"
-                               v-else-if="!item.check && (item.confirm||battle_statu)"></i>
+                               v-else-if="!item.check && (item.confirm||battle_over)"></i>
                             <div style="font-size: 16px;color: #666;" v-else>待作答...</div>
                         </li>
                     </ul>
                 </el-col>
             </el-row>
         </div>
+        <battle-over :battle_over="battle_over" :myScore="total_score"></battle-over>
     </div>
 </template>
 
 <script>
     import {mapState, mapGetters} from 'vuex'
+    import battleOver from '../../student/modules/battle_over'
 
     export default {
+        components: {
+            battleOver
+        },
         data() {
             return {
-                quesData: {
-                    time: 600
-                },
+                // 背景模糊
+                bgBlur: 'bgBlur',
+
+                total_time:0,
                 // 我的总分
                 total_score: 0,
                 battle_time: {
@@ -88,7 +95,7 @@
                 battle_progress: 0,
                 battle_progStatu: 'success',
                 battle_timer: null, // 对战计时器
-                battle_statu: false, // 对战状态 true 初始/正在对战，false 对战结束
+                battle_over: false, // 对战状态 true 初始/正在对战，false 对战结束
 
                 ques_list: [] // 题目列表
             }
@@ -113,6 +120,7 @@
             // 获得对应题型内容
             this.$http('GET', false, './static/dataJson/vArithmetic.json', {}, (data) => {
                 self.ques_list = data.list;
+                self.total_time = data.total_time;
                 // 通知对方已经准备就绪
                 websocket.send(JSON.stringify({type: 'battle_isReady'}));
                 if (self.otherIsReady) {
@@ -125,7 +133,10 @@
             // 对战开始
             battleStart() {
                 const self = this;
-                let total_time = this.quesData.time;
+                // 去除背景模糊
+                this.bgBlur = '';
+
+                let total_time = this.total_time;
 
                 this.battle_time = this.formatTime(total_time);
                 // 对战倒计时
@@ -136,9 +147,9 @@
                         self.battleOver();
                     } else {
                         total_time--;
-                        self.battle_progress = (1 - (total_time - 1) / self.quesData.time) * 100;
+                        self.battle_progress = (1 - (total_time - 1) / self.total_time) * 100;
                         self.battle_time = self.formatTime(total_time);
-                        if ((total_time / self.quesData.time) > 40 && total_time > 10) {
+                        if ((total_time / self.total_time) > 40 && total_time > 10) {
                             self.battle_progStatu = '';
                         } else if (total_time <= 10) {
                             self.battle_progStatu = 'exception';
@@ -158,8 +169,9 @@
             },
             // 对战结束
             battleOver() {
-                const self = this;
-                this.battle_statu = true;
+                this.battle_over = true;
+                // 添加背景模糊
+                this.bgBlur = 'bgBlur';
             },
             // 确认答案
             confirmAnswer(index, val) {
@@ -189,7 +201,7 @@
 
 
 <style lang="scss">
-    @import "../../styles/mixins";
+    @import "../../../styles/mixins";
 
     html {
         background-color : #f4f4f4;
@@ -202,8 +214,10 @@
         background-color : #fff;
         max-width        : 1200px;
         margin           : 20px auto 50px;
-        .over-title {
-
+        transition : filter .3s;
+        &.bgBlur {
+            -webkit-filter : blur(10px);
+            filter         : blur(10px);
         }
         .battle-head {
             position    : relative;

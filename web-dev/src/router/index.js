@@ -36,6 +36,13 @@ export const router = new Router({
                         title: '教师端对战榜'
                     },
                     component: resolve => require(['../components/teacher/modules/battle_list_view.vue'], resolve),
+                },
+                {
+                    path: 'editQues',
+                    meta: {
+                        title: '题目编辑'
+                    },
+                    component: resolve => require(['../components/teacher/modules/edit_questions.vue'], resolve),
                 }
             ]
         },

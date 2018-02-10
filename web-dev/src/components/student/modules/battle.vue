@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div v-loading.fullscreen.lock="battle_statu && !$store.state.student.otherIsReady"
+         element-loading-text="等待对方准备就绪...">
         <!--  倒计时组件  -->
         <v-countdown
             :count_time="count_time"
@@ -13,12 +14,6 @@
         <br>
         <br>
         <br>
-        <h2 class="text-center"
-            v-loading.fullscreen.lock="battle_statu && !$store.state.student.otherIsReady"
-            element-loading-text="等待对方准备就绪...">
-            对战面板
-        </h2>
-
         <keep-alive>
             <!-- 对战面板: 加载不同题型组件 -->
             <component :is="ques_type">
@@ -38,7 +33,7 @@
     export default {
         components: {
             vCountdown,
-            ...battleTpl
+            ...battleTpl('play')
         },
         data() {
             return {

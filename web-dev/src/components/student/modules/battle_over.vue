@@ -29,7 +29,7 @@
                 'otherScore'
             ]),
             battleResult() {
-                return this.myScore === this.otherScore?(this.myScore > this.otherScore ? "YOU WIN!" : "YOU LOST!"):"平局！"
+                return (this.myScore === this.otherScore)?"平局！":(this.myScore > this.otherScore ? "YOU WIN!" : "YOU LOST!")
             }
         },
         methods:{

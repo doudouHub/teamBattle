@@ -1,0 +1,691 @@
+{
+    "name": "breakBrick",
+    "title": "敲击掉落的奇数砖块",
+    "total_time": "62",
+    "list": [
+        {
+            "id": 1,
+            "posTimes": 1,
+            "margin": -15.42,
+            "delay": 0.74,
+            "speed": 8.09,
+            "title": 4,
+            "prop": false
+        },
+        {
+            "id": 2,
+            "posTimes": 2,
+            "margin": 8.94,
+            "delay": 0.17000000000000004,
+            "speed": 8.7,
+            "title": 42,
+            "prop": false
+        },
+        {
+            "id": 3,
+            "posTimes": 4,
+            "margin": -6.51,
+            "delay": 1.6099999999999999,
+            "speed": 10.82,
+            "title": 29,
+            "prop": true
+        },
+        {
+            "id": 4,
+            "posTimes": 0,
+            "margin": -11.04,
+            "delay": 0.89,
+            "speed": 4.46,
+            "title": 39,
+            "prop": true
+        },
+        {
+            "id": 5,
+            "posTimes": 5,
+            "margin": -4.49,
+            "delay": 0.30000000000000004,
+            "speed": 5.48,
+            "title": 63,
+            "prop": true
+        },
+        {
+            "id": 6,
+            "posTimes": 6,
+            "margin": 12.84,
+            "delay": 0.18000000000000005,
+            "speed": 5.69,
+            "title": 73,
+            "prop": true
+        },
+        {
+            "id": 7,
+            "posTimes": 2,
+            "margin": 6.58,
+            "delay": 5.99,
+            "speed": 6.57,
+            "title": 36,
+            "prop": false
+        },
+        {
+            "id": 8,
+            "posTimes": 4,
+            "margin": -11.45,
+            "delay": 4.03,
+            "speed": 4.35,
+            "title": 33,
+            "prop": true
+        },
+        {
+            "id": 9,
+            "posTimes": 1,
+            "margin": 19.71,
+            "delay": 4.38,
+            "speed": 6.06,
+            "title": 53,
+            "prop": true
+        },
+        {
+            "id": 10,
+            "posTimes": 0,
+            "margin": -19.03,
+            "delay": 5.6899999999999995,
+            "speed": 4.68,
+            "title": 7,
+            "prop": true
+        },
+        {
+            "id": 11,
+            "posTimes": 6,
+            "margin": 3.51,
+            "delay": 5.52,
+            "speed": 12.6,
+            "title": 51,
+            "prop": true
+        },
+        {
+            "id": 12,
+            "posTimes": 5,
+            "margin": -9.44,
+            "delay": 4.61,
+            "speed": 5.05,
+            "title": 9,
+            "prop": true
+        },
+        {
+            "id": 13,
+            "posTimes": 7,
+            "margin": -15.04,
+            "delay": 5.78,
+            "speed": 3.17,
+            "title": 31,
+            "prop": true
+        },
+        {
+            "id": 14,
+            "posTimes": 1,
+            "margin": -2.17,
+            "delay": 9.32,
+            "speed": 6.17,
+            "title": 40,
+            "prop": false
+        },
+        {
+            "id": 15,
+            "posTimes": 4,
+            "margin": 1.7,
+            "delay": 10.13,
+            "speed": 3.14,
+            "title": 21,
+            "prop": true
+        },
+        {
+            "id": 16,
+            "posTimes": 2,
+            "margin": 15.14,
+            "delay": 9.41,
+            "speed": 10.97,
+            "title": 68,
+            "prop": false
+        },
+        {
+            "id": 17,
+            "posTimes": 0,
+            "margin": 0.45,
+            "delay": 10.12,
+            "speed": 7.84,
+            "title": 61,
+            "prop": true
+        },
+        {
+            "id": 18,
+            "posTimes": 6,
+            "margin": 8.54,
+            "delay": 9.91,
+            "speed": 6.04,
+            "title": 57,
+            "prop": true
+        },
+        {
+            "id": 19,
+            "posTimes": 5,
+            "margin": 19.19,
+            "delay": 10.78,
+            "speed": 11.75,
+            "title": 77,
+            "prop": true
+        },
+        {
+            "id": 20,
+            "posTimes": 7,
+            "margin": 12.77,
+            "delay": 10.08,
+            "speed": 12.37,
+            "title": 56,
+            "prop": false
+        },
+        {
+            "id": 21,
+            "posTimes": 4,
+            "margin": 2.85,
+            "delay": 16.02,
+            "speed": 10.83,
+            "title": 32,
+            "prop": false
+        },
+        {
+            "id": 22,
+            "posTimes": 1,
+            "margin": -11.35,
+            "delay": 15.6,
+            "speed": 12.8,
+            "title": 18,
+            "prop": false
+        },
+        {
+            "id": 23,
+            "posTimes": 2,
+            "margin": -6.71,
+            "delay": 15.96,
+            "speed": 11.11,
+            "title": 49,
+            "prop": true
+        },
+        {
+            "id": 24,
+            "posTimes": 0,
+            "margin": -1.05,
+            "delay": 16.38,
+            "speed": 12.53,
+            "title": 8,
+            "prop": false
+        },
+        {
+            "id": 25,
+            "posTimes": 6,
+            "margin": -0.67,
+            "delay": 15.43,
+            "speed": 5.39,
+            "title": 24,
+            "prop": false
+        },
+        {
+            "id": 26,
+            "posTimes": 5,
+            "margin": -16.44,
+            "delay": 16.54,
+            "speed": 4.16,
+            "title": 60,
+            "prop": false
+        },
+        {
+            "id": 27,
+            "posTimes": 7,
+            "margin": 13.93,
+            "delay": 15.84,
+            "speed": 9.93,
+            "title": 34,
+            "prop": false
+        },
+        {
+            "id": 28,
+            "posTimes": 4,
+            "margin": -4.84,
+            "delay": 21.87,
+            "speed": 3.75,
+            "title": 14,
+            "prop": false
+        },
+        {
+            "id": 29,
+            "posTimes": 1,
+            "margin": -3.34,
+            "delay": 21.13,
+            "speed": 9.2,
+            "title": 59,
+            "prop": true
+        },
+        {
+            "id": 30,
+            "posTimes": 2,
+            "margin": -10.09,
+            "delay": 21.58,
+            "speed": 11.74,
+            "title": 16,
+            "prop": false
+        },
+        {
+            "id": 31,
+            "posTimes": 0,
+            "margin": 5.67,
+            "delay": 20.64,
+            "speed": 4.31,
+            "title": 72,
+            "prop": false
+        },
+        {
+            "id": 32,
+            "posTimes": 6,
+            "margin": -11.57,
+            "delay": 20.81,
+            "speed": 6.65,
+            "title": 35,
+            "prop": true
+        },
+        {
+            "id": 33,
+            "posTimes": 7,
+            "margin": 19.98,
+            "delay": 20.41,
+            "speed": 4.17,
+            "title": 1,
+            "prop": true
+        },
+        {
+            "id": 34,
+            "posTimes": 5,
+            "margin": 0.25,
+            "delay": 21.05,
+            "speed": 8.44,
+            "title": 66,
+            "prop": false
+        },
+        {
+            "id": 35,
+            "posTimes": 0,
+            "margin": 8.57,
+            "delay": 26.2,
+            "speed": 3.76,
+            "title": 52,
+            "prop": false
+        },
+        {
+            "id": 36,
+            "posTimes": 1,
+            "margin": 3.32,
+            "delay": 26.75,
+            "speed": 5.42,
+            "title": 13,
+            "prop": true
+        },
+        {
+            "id": 37,
+            "posTimes": 4,
+            "margin": -0.81,
+            "delay": 25.75,
+            "speed": 11.55,
+            "title": 11,
+            "prop": true
+        },
+        {
+            "id": 38,
+            "posTimes": 2,
+            "margin": 6.64,
+            "delay": 25.31,
+            "speed": 3.2,
+            "title": 45,
+            "prop": true
+        },
+        {
+            "id": 39,
+            "posTimes": 6,
+            "margin": 5.11,
+            "delay": 26.32,
+            "speed": 3.48,
+            "title": 65,
+            "prop": true
+        },
+        {
+            "id": 40,
+            "posTimes": 7,
+            "margin": -5.71,
+            "delay": 25.22,
+            "speed": 11.55,
+            "title": 43,
+            "prop": true
+        },
+        {
+            "id": 41,
+            "posTimes": 5,
+            "margin": -15.64,
+            "delay": 26.72,
+            "speed": 3.88,
+            "title": 58,
+            "prop": false
+        },
+        {
+            "id": 42,
+            "posTimes": 0,
+            "margin": 17.37,
+            "delay": 32.21,
+            "speed": 7.3,
+            "title": 38,
+            "prop": false
+        },
+        {
+            "id": 43,
+            "posTimes": 4,
+            "margin": 1.13,
+            "delay": 31.77,
+            "speed": 4.5,
+            "title": 25,
+            "prop": true
+        },
+        {
+            "id": 44,
+            "posTimes": 7,
+            "margin": 3.42,
+            "delay": 31.06,
+            "speed": 9.39,
+            "title": 12,
+            "prop": false
+        },
+        {
+            "id": 45,
+            "posTimes": 1,
+            "margin": 15.17,
+            "delay": 32.34,
+            "speed": 3.49,
+            "title": 48,
+            "prop": false
+        },
+        {
+            "id": 46,
+            "posTimes": 5,
+            "margin": -11.91,
+            "delay": 32.05,
+            "speed": 8.78,
+            "title": 2,
+            "prop": false
+        },
+        {
+            "id": 47,
+            "posTimes": 2,
+            "margin": 15.26,
+            "delay": 31.19,
+            "speed": 4.7,
+            "title": 17,
+            "prop": true
+        },
+        {
+            "id": 48,
+            "posTimes": 6,
+            "margin": -10.63,
+            "delay": 32.05,
+            "speed": 8.36,
+            "title": 3,
+            "prop": true
+        },
+        {
+            "id": 49,
+            "posTimes": 4,
+            "margin": -12.24,
+            "delay": 36.9,
+            "speed": 10.11,
+            "title": 62,
+            "prop": false
+        },
+        {
+            "id": 50,
+            "posTimes": 7,
+            "margin": -10.05,
+            "delay": 37.2,
+            "speed": 8.75,
+            "title": 64,
+            "prop": false
+        },
+        {
+            "id": 51,
+            "posTimes": 0,
+            "margin": -19.12,
+            "delay": 37.97,
+            "speed": 7.92,
+            "title": 75,
+            "prop": true
+        },
+        {
+            "id": 52,
+            "posTimes": 5,
+            "margin": 0.08,
+            "delay": 37.92,
+            "speed": 8.17,
+            "title": 71,
+            "prop": true
+        },
+        {
+            "id": 53,
+            "posTimes": 1,
+            "margin": 6.73,
+            "delay": 36.19,
+            "speed": 5.6,
+            "title": 55,
+            "prop": true
+        },
+        {
+            "id": 54,
+            "posTimes": 6,
+            "margin": -2.38,
+            "delay": 37.71,
+            "speed": 5.87,
+            "title": 47,
+            "prop": true
+        },
+        {
+            "id": 55,
+            "posTimes": 2,
+            "margin": 6.1,
+            "delay": 37.66,
+            "speed": 6.33,
+            "title": 5,
+            "prop": true
+        },
+        {
+            "id": 56,
+            "posTimes": 4,
+            "margin": 1.7,
+            "delay": 42.19,
+            "speed": 8.4,
+            "title": 22,
+            "prop": false
+        },
+        {
+            "id": 57,
+            "posTimes": 5,
+            "margin": 14.16,
+            "delay": 41.46,
+            "speed": 4,
+            "title": 15,
+            "prop": true
+        },
+        {
+            "id": 58,
+            "posTimes": 7,
+            "margin": 3.34,
+            "delay": 41.31,
+            "speed": 4.38,
+            "title": 69,
+            "prop": true
+        },
+        {
+            "id": 59,
+            "posTimes": 0,
+            "margin": -4.9,
+            "delay": 42.54,
+            "speed": 9.04,
+            "title": 19,
+            "prop": true
+        },
+        {
+            "id": 60,
+            "posTimes": 6,
+            "margin": -17.87,
+            "delay": 41.78,
+            "speed": 11.56,
+            "title": 30,
+            "prop": false
+        },
+        {
+            "id": 61,
+            "posTimes": 1,
+            "margin": -4.9,
+            "delay": 42.18,
+            "speed": 7.47,
+            "title": 70,
+            "prop": false
+        },
+        {
+            "id": 62,
+            "posTimes": 2,
+            "margin": 6.02,
+            "delay": 41.8,
+            "speed": 11.65,
+            "title": 27,
+            "prop": true
+        },
+        {
+            "id": 63,
+            "posTimes": 5,
+            "margin": -11.42,
+            "delay": 47.36,
+            "speed": 4.86,
+            "title": 6,
+            "prop": false
+        },
+        {
+            "id": 64,
+            "posTimes": 4,
+            "margin": -12.15,
+            "delay": 47.06,
+            "speed": 8.93,
+            "title": 50,
+            "prop": false
+        },
+        {
+            "id": 65,
+            "posTimes": 7,
+            "margin": -14.14,
+            "delay": 47.4,
+            "speed": 4.85,
+            "title": 28,
+            "prop": false
+        },
+        {
+            "id": 66,
+            "posTimes": 0,
+            "margin": -6.98,
+            "delay": 47.7,
+            "speed": 7.3,
+            "title": 23,
+            "prop": true
+        },
+        {
+            "id": 67,
+            "posTimes": 6,
+            "margin": 2.92,
+            "delay": 47.26,
+            "speed": 11.04,
+            "title": 44,
+            "prop": false
+        },
+        {
+            "id": 68,
+            "posTimes": 1,
+            "margin": 1.34,
+            "delay": 47.76,
+            "speed": 11.15,
+            "title": 46,
+            "prop": false
+        },
+        {
+            "id": 69,
+            "posTimes": 2,
+            "margin": 17.94,
+            "delay": 47.25,
+            "speed": 8.6,
+            "title": 79,
+            "prop": true
+        },
+        {
+            "id": 70,
+            "posTimes": 5,
+            "margin": -2.57,
+            "delay": 52.25,
+            "speed": 6.83,
+            "title": 67,
+            "prop": true
+        },
+        {
+            "id": 71,
+            "posTimes": 4,
+            "margin": 13.76,
+            "delay": 53.58,
+            "speed": 12.94,
+            "title": 37,
+            "prop": true
+        },
+        {
+            "id": 72,
+            "posTimes": 0,
+            "margin": -3.47,
+            "delay": 52.94,
+            "speed": 4.84,
+            "title": 26,
+            "prop": false
+        },
+        {
+            "id": 73,
+            "posTimes": 1,
+            "margin": 3.48,
+            "delay": 53.05,
+            "speed": 11.89,
+            "title": 41,
+            "prop": true
+        },
+        {
+            "id": 74,
+            "posTimes": 2,
+            "margin": -2.62,
+            "delay": 53.18,
+            "speed": 9.1,
+            "title": 10,
+            "prop": false
+        },
+        {
+            "id": 75,
+            "posTimes": 7,
+            "margin": 13.12,
+            "delay": 52.21,
+            "speed": 6.93,
+            "title": 54,
+            "prop": false
+        },
+        {
+            "id": 76,
+            "posTimes": 6,
+            "margin": -14.54,
+            "delay": 53.54,
+            "speed": 5.05,
+            "title": 20,
+            "prop": false
+        }
+    ]
+}
