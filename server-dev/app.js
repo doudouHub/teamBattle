@@ -106,7 +106,8 @@
                         clientIndex += 1;
                         wsSend(client_uuid, {
                             "code": 'connected',
-                            "data": '', "msg": '连接成功'
+                            "data": '',
+                            "msg": '连接成功'
                         });
                         console.log('新增用户：' + msg.userName, '，客户端连接数量：' + clientIndex);
                         break;
