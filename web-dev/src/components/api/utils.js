@@ -10,6 +10,7 @@ import config from "../../config";
 window.executePdu = () => {
 
 };
+
 export default {
     install: function (Vue, options) {
         Vue.prototype.$axios = axios;
