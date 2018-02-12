@@ -21,6 +21,9 @@ npm依赖包安装，建议安装cnpm：https://npm.taobao.org/
 >`/web-dev` **npm run dev**
 >> 地址：localhost:8080
 
+## 分析
+>`/web-dev` **npm run analyz**
+
 ## 编译打包
 
 >`/web-dev` **npm run build**
@@ -34,6 +37,7 @@ npm依赖包安装，建议安装cnpm：https://npm.taobao.org/
 │  App.vue - 启动组件
 │  config.js - 接口地址和题型模板配置
 │  main.js - 启动函数
+│  ui-settings.js - UI组件按模块引用
 │
 ├─assets - 组件内共享引用的资源
 │  └─scripts

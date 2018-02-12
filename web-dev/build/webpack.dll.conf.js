@@ -18,15 +18,15 @@ module.exports = {
         library: '[name]_library'
     },
     module: {
-        rules: [
+        loaders: [
             {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue'
             },
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                exclude: /node_modules/
+                exclude: /node_modules\/(?!(autotrack|dom-utils))/
             }
         ]
     },
