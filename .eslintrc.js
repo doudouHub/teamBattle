@@ -36,5 +36,6 @@ module.exports = {
         "semi": [0, "always"],
         // 连续声明
         "one-var": 0,
+
     }
 }
