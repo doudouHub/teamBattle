@@ -1,13 +1,17 @@
 ﻿(function () {
     var path = require('path');
     var events = require('events'); // 引入 events 模块
+    // var compression = require('compression')
     var express = require('express');
     var uuid = require('uuid/v1');
     var WebSocket = require('ws');
 
     var app = express();
 
-    // 定义静态档案目录
+    // // 开启GZIP
+    // app.use(compression())
+
+    // 定义静态档案目录 - 如果使用nginx则关闭端口
     app.use(express.static(path.join(__dirname, 'public')));
     app.listen(8888, function () {
         console.log('app listening on port 8888');
