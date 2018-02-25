@@ -16,6 +16,7 @@ npm依赖包安装，建议安装cnpm：https://npm.taobao.org/
 
 >运行`/serve-dev/app.js`
 >>服务器地址：localhost:8888
+>>nginx：处理服务器文件 - localhost:9999
 
 >调试
 >`/web-dev` **npm run dev**

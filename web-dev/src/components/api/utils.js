@@ -2,9 +2,7 @@
  * 工具类api
  **/
 
-import Vue from 'vue'
 import axios from 'axios'
-import config from "../../config"
 
 // 提供C++调用
 window.executePdu = () => {
@@ -51,7 +49,7 @@ export default {
                 data: formData,
                 timeout: 60000,
                 responseType: 'json',
-                cancelToken: new CancelToken(function executor(c) {
+                cancelToken: new CancelToken(function executor (c) {
                     // executor 函数接收一个 cancel 函数作为参数
                     try {
                         that.cancelToken = c
@@ -77,7 +75,7 @@ export default {
                             } else {
                                 // 数据返回正确回调
                                 let _data = res.data.data
-                                if ((typeof _data == 'string') && _data.constructor == String) {
+                                if ((typeof _data === 'string') && _data.constructor === 'string') {
                                     try {
                                         _data = JSON.parse(_data)
                                     } catch (err) {
@@ -220,6 +218,5 @@ export default {
             }
             return res
         }
-
     }
 }

@@ -14,7 +14,7 @@
 
     export default {
         name: "student",
-        data() {
+        data () {
             return {
                 matchLoading: false
             }
@@ -25,20 +25,20 @@
                 'battle_statu'
             ])
         },
-        mounted() {
-            const self = this;
+        mounted () {
+            // const self = this;
             // 存储学生状态默认值
             this.$sessionSave.set('student_state_default', this.$store.state.student);
         },
         methods: {
             // 匹配对战
-            matchAgainst() {
-                const self = this;
+            matchAgainst () {
+                // const self = this;
 
                 // 发送请求匹配信息
                 websocket.send(JSON.stringify({type: 'matching'}));
                 this.matchLoading = true;
-            },
+            }
         }
     }
 </script>

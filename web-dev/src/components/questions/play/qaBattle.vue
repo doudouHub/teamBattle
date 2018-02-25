@@ -71,7 +71,7 @@
         components: {
             battleOver
         },
-        data() {
+        data () {
             return {
                 // 背景模糊
                 bgBlur: 'bgBlur',
@@ -121,29 +121,29 @@
                 'allReadyStart'
             ]),
             // 倒计时剩余百分比
-            count_down_percent() {
+            count_down_percent () {
                 return this.count_down_left === this.count_down ? 100 : !this.count_down_left ? 0 : (this.count_down_left - 1) / this.count_down * 100
             },
             // 倒计时状态
-            count_down_status() {
+            count_down_status () {
                 return this.count_down_percent < 50 ? 'exception' : (this.count_down_percent < 80 ? '' : 'success')
             },
             // 我的分数进度
-            total_score_progress() {
+            total_score_progress () {
                 return this.total_score / this.full_marks_score * 100;
-            },
+            }
         },
         watch: {
-            allReadyStart() {
+            allReadyStart () {
                 // 确认对方题型已经加载完毕,并且已经过完倒计时，执行竞赛开始
                 this.battleStart();
             },
-            otherAnswer(val) {
+            otherAnswer (val) {
                 // 如果手动对方提交了答案，判断我方是否答题，如果是则进行下一题
                 if (this.cur_options_select && val[this.ques_run_index] !== 'false') this.nextQuestion();
             }
         },
-        mounted() {
+        mounted () {
             const self = this;
             // 获得对应题型内容
             this.$http('GET', false, './static/dataJson/qaBattle.json', {}, (data) => {
@@ -167,7 +167,7 @@
         },
         methods: {
             // 对战开始
-            battleStart() {
+            battleStart () {
                 const self = this;
 
                 // 去除背景模糊
@@ -191,7 +191,7 @@
                 }, 1000);
             },
             // 开始下一题
-            nextQuestion() {
+            nextQuestion () {
                 const self = this;
                 // 如果倒计时结束还没有做出选择，系统直接默认选错提交
                 if (!this.cur_options_select) this.confirmAnswer('false');
@@ -215,7 +215,7 @@
                 }, 2500)
             },
             // 清除计时器
-            clearTimer() {
+            clearTimer () {
                 // 清除上一题计时器
                 if (this.count_down_timer) {
                     clearInterval(this.count_down_timer);
@@ -223,7 +223,7 @@
                 }
             },
             // 题目切换载入动画设置
-            toggleLoading() {
+            toggleLoading () {
                 const self = this;
                 // 卸载就题目，500ms 后重新载入题型
                 this.cur_ques_loaded = false;
@@ -232,13 +232,13 @@
                 }, 300)
             },
             // 对战结束
-            battleOver() {
+            battleOver () {
                 this.battle_over = true;
                 // 添加背景模糊
                 this.bgBlur = 'bgBlur';
             },
             // 确认答案
-            confirmAnswer(val) {
+            confirmAnswer (val) {
                 // 不可重复答题
                 if (this.cur_options_select) return;
 
@@ -269,7 +269,7 @@
                 }));
                 // 当对方也已经打完题，直接进入下一题
                 if (this.otherAnswer[this.ques_run_index] && val !== 'false') this.nextQuestion();
-            },
+            }
         }
     }
 </script>
@@ -278,88 +278,88 @@
     @import "../../../styles/mixins";
 
     html {
-        background-color : #f4f4f4;
+        background-color: #f4f4f4;
     }
 
     /* 对战面板 */
     .battle-panel.qaBattle {
-        width      : 100%;
-        max-width  : 660px;
-        margin     : 0 auto;
-        transition : filter .3s;
+        width: 100%;
+        max-width: 660px;
+        margin: 0 auto;
+        transition: filter .3s;
         &.bgBlur {
-            -webkit-filter : blur(10px);
-            filter         : blur(10px);
+            -webkit-filter: blur(10px);
+            filter: blur(10px);
         }
         .battle-head {
-            position         : relative;
-            text-align       : center;
-            font-size        : 32px;
-            font-weight      : bold;
-            color            : #666;
-            height           : 50px;
-            background-color : #fff;
-            border-radius    : 50px;
-            border           : 1px solid #ddd;
+            position: relative;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #666;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50px;
+            border: 1px solid #ddd;
             &:before, &:after {
                 @include stretch(0, false, false, false);
-                line-height : 50px;
-                font-size   : 16px;
-                z-index     : 10;
-                padding     : 0 15px;
+                line-height: 50px;
+                font-size: 16px;
+                z-index: 10;
+                padding: 0 15px;
             }
             &:before {
-                content : attr(data-myname);
-                left    : 0;
+                content: attr(data-myname);
+                left: 0;
             }
             &:after {
-                content : attr(data-othername);
-                right   : 0;
+                content: attr(data-othername);
+                right: 0;
             }
             .battle-score {
                 @include stretch(0, false, false, false);
-                line-height : 50px;
-                font-size   : 16px;
-                padding     : 0 15px;
+                line-height: 50px;
+                font-size: 16px;
+                padding: 0 15px;
                 &.mine {
-                    right        : 50%;
-                    margin-right : 50px;
+                    right: 50%;
+                    margin-right: 50px;
                 }
                 &.other {
-                    left        : 50%;
-                    margin-left : 50px;
+                    left: 50%;
+                    margin-left: 50px;
                 }
             }
             .el-progress {
-                position         : relative;
-                z-index          : 10;
-                background-color : #fff;
-                border-radius    : 50%;
+                position: relative;
+                z-index: 10;
+                background-color: #fff;
+                border-radius: 50%;
                 @include stretch(50%, false, false, 50%);
-                margin           : -40px auto auto -40px;
+                margin: -40px auto auto -40px;
                 &:after {
-                    content     : attr(aria-lefttime);
+                    content: attr(aria-lefttime);
                     @include stretch(50%, false, false, 50%);
-                    margin      : -40px auto auto -40px;
-                    width       : 100%;
-                    height      : 100%;
-                    line-height : 80px;
-                    font-size   : 30px;
-                    text-align  : center;
+                    margin: -40px auto auto -40px;
+                    width: 100%;
+                    height: 100%;
+                    line-height: 80px;
+                    font-size: 30px;
+                    text-align: center;
                 }
                 .el-progress-circle {
                     path {
-                        transition-duration                : 1s !important;
-                        -webkit-transition-duration        : 1s !important;
-                        transition-timing-function         : linear !important;
-                        -webkit-transition-timing-function : linear !important;
+                        transition-duration: 1s !important;
+                        -webkit-transition-duration: 1s !important;
+                        transition-timing-function: linear !important;
+                        -webkit-transition-timing-function: linear !important;
                     }
                 }
                 &.animate-none {
                     .el-progress-circle {
                         path {
-                            transition-duration         : 0s !important;
-                            -webkit-transition-duration : 0s !important;
+                            transition-duration: 0s !important;
+                            -webkit-transition-duration: 0s !important;
                         }
                     }
                 }
@@ -367,123 +367,123 @@
         }
 
         .battle-content {
-            position : relative;
-            height   : 400px;
+            position: relative;
+            height: 400px;
             .score-progress {
                 @include stretch(400px, false, false, false);
-                transform                : rotateZ(-90deg);
-                -webkit-transform        : rotateZ(-90deg);
-                transform-origin         : 0 50%;
-                -webkit-transform-origin : 0 50%;
-                width                    : 300px;
+                transform: rotateZ(-90deg);
+                -webkit-transform: rotateZ(-90deg);
+                transform-origin: 0 50%;
+                -webkit-transform-origin: 0 50%;
+                width: 300px;
                 .el-progress-bar__outer {
-                    background-color : #fff;
-                    border           : 1px solid #eee;
+                    background-color: #fff;
+                    border: 1px solid #eee;
                 }
                 .el-progress-bar__inner {
-                    transition : width .3s;
+                    transition: width .3s;
                 }
                 &.mine {
-                    left        : 0;
-                    margin-left : 10px;
+                    left: 0;
+                    margin-left: 10px;
                 }
                 &.other {
-                    left        : 100%;
-                    margin-left : -10px;
+                    left: 100%;
+                    margin-left: -10px;
                 }
             }
         }
         .battle-options {
-            transition : transform .5s;
-            transition : -webkit-transform .5s;
+            transition: transform .5s;
+            transition: -webkit-transform .5s;
             li {
-                line-height      : 44px;
-                border           : 1px solid #ddd;
-                border-radius    : 50px;
-                margin           : 0 auto 20px;
-                background-color : #fff;
-                font-size        : 18px;
-                width            : 300px;
-                cursor           : pointer;
-                transition       : transform .5s, opacity .5s, background-color .5s;
-                transition       : -webkit-transform .5s, opacity .5s, background-color .5s;
+                line-height: 44px;
+                border: 1px solid #ddd;
+                border-radius: 50px;
+                margin: 0 auto 20px;
+                background-color: #fff;
+                font-size: 18px;
+                width: 300px;
+                cursor: pointer;
+                transition: transform .5s, opacity .5s, background-color .5s;
+                transition: -webkit-transform .5s, opacity .5s, background-color .5s;
                 .el-icon-close {
-                    display     : none;
-                    position    : absolute;
-                    top         : 50%;
-                    z-index     : 100;
-                    color       : #fff;
-                    margin-top  : -9px;
-                    font-weight : bold;
+                    display: none;
+                    position: absolute;
+                    top: 50%;
+                    z-index: 100;
+                    color: #fff;
+                    margin-top: -9px;
+                    font-weight: bold;
                 }
                 // 我的答案错误，我的答案正确，对方的答案错误，对方的答案正确
                 &.wrong-mine, &.right-mine, &.wrong-other, &.right-other {
-                    transform         : scale3d(1.02, 1.02, 1);
-                    -webkit-transform : scale3d(1.02, 1.02, 1);
-                    opacity           : 1 !important;
-                    color             : #fff;
-                    font-weight       : bold;
+                    transform: scale3d(1.02, 1.02, 1);
+                    -webkit-transform: scale3d(1.02, 1.02, 1);
+                    opacity: 1 !important;
+                    color: #fff;
+                    font-weight: bold;
                 }
                 &.wrong-mine, &.wrong-other {
-                    background-color : #f56c6c;
-                    border-color     : #f56c6c;
+                    background-color: #f56c6c;
+                    border-color: #f56c6c;
                 }
                 &.wrong-mine {
                     .el-icon-close.left {
-                        display : block;
-                        left    : 20px;
+                        display: block;
+                        left: 20px;
                     }
                 }
                 &.wrong-other {
                     .el-icon-close.right {
-                        display : block;
-                        right   : 20px;
+                        display: block;
+                        right: 20px;
                     }
                 }
                 &.right-mine, &.right-other {
-                    background-color : #67c23a;
-                    border-color     : #67c23a;
+                    background-color: #67c23a;
+                    border-color: #67c23a;
                 }
                 &.right-mine:before, &.right-other:after {
-                    content       : '';
-                    display       : block;
-                    position      : absolute;
-                    top           : 50%;
-                    z-index       : 100;
-                    width         : 10px;
-                    height        : 10px;
-                    border        : 3px solid #fff;
-                    border-radius : 50%;
-                    margin-top    : -8px;
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    z-index: 100;
+                    width: 10px;
+                    height: 10px;
+                    border: 3px solid #fff;
+                    border-radius: 50%;
+                    margin-top: -8px;
                 }
                 &.right-mine:before {
-                    left : 20px;
+                    left: 20px;
                 }
                 &.right-other:after {
-                    right : 20px;
+                    right: 20px;
                 }
             }
             // 选择后样式
             &.hasdone {
-                transform         : scale3d(.95, .95, 1);
-                -webkit-transform : scale3d(.95, .95, 1);
+                transform: scale3d(.95, .95, 1);
+                -webkit-transform: scale3d(.95, .95, 1);
                 li {
-                    opacity : .5;
+                    opacity: .5;
                     // 正确答案
                     &.right {
-                        transform         : scale3d(1.06, 1.06, 1);
-                        -webkit-transform : scale3d(1.06, 1.06, 1);
-                        opacity           : 1;
-                        color             : #fff;
-                        font-weight       : bold;
-                        background-color  : #67c23a;
-                        border-color      : #67c23a;
+                        transform: scale3d(1.06, 1.06, 1);
+                        -webkit-transform: scale3d(1.06, 1.06, 1);
+                        opacity: 1;
+                        color: #fff;
+                        font-weight: bold;
+                        background-color: #67c23a;
+                        border-color: #67c23a;
                     }
                 }
             }
             &.hasSelect {
                 li {
-                    cursor : default;
+                    cursor: default;
                 }
             }
         }

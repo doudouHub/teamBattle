@@ -86,7 +86,7 @@
 
 <script>
     export default {
-        data() {
+        data () {
             return {
                 formData: {
                     title: '',
@@ -108,22 +108,22 @@
                 allTagList: []
             }
         },
-        mounted() {
+        mounted () {
             // 初始化数据 - 打乱现有标签排列
             this.upsetTaglist();
         },
         methods: {
             // 提交表单
-            submitForm(formName) {
+            submitForm (formName) {
                 this.upsetTaglist();
             },
             // 选择掉落密度
-            selectDensity(val) {
+            selectDensity (val) {
                 this.formData.density = val;
                 this.upsetTaglist();
             },
             // 打乱标签排列
-            upsetTaglist() {
+            upsetTaglist () {
                 let [_answerTags, _interferenceTags] = [[], []];
                 // 为所有砖块绑定答案
                 for (let i in this.formData.answerTags.list) {
@@ -194,26 +194,26 @@
                 this.allTagList = allTagList;
 
                 // 获取中间随机值
-                function getMedianRandom(max, min) {
+                function getMedianRandom (max, min) {
                     return Math.round((Math.random() * (max - min) + min) * 100) / 100
                 }
 
                 console.log(JSON.stringify(allTagList));
             },
             // 删除当前标签
-            deleteThisTag(type, tag) {
+            deleteThisTag (type, tag) {
                 this.formData[type].list.splice(this.formData[type].list.indexOf(tag), 1);
                 this.upsetTaglist();
             },
             // 显示标签输入框
-            showTagInput(type) {
+            showTagInput (type) {
                 this.formData[type].inputVisible = true;
                 this.$nextTick(_ => {
                     this.$refs[type].$refs.input.focus();
                 });
             },
             // 新建新标签
-            createNewTag(type) {
+            createNewTag (type) {
                 let inputValue = this.formData[type].inputValue;
                 if (inputValue) {
                     this.formData[type].list.push(inputValue);
@@ -222,7 +222,7 @@
                 this.upsetTaglist();
             },
             // 失去焦点恢复创建标签button
-            recoverTagButton(type) {
+            recoverTagButton (type) {
                 this.createNewTag(type);
                 this.formData[type].inputVisible = false;
             }
@@ -232,12 +232,12 @@
 
 <style lang="scss" scoped>
     .edit-container {
-        width  : 660px;
-        margin : 0 auto;
+        width: 660px;
+        margin: 0 auto;
         .tag-box {
-            padding       : 10px 15px;
-            border-radius : 4px;
-            border        : 1px solid #dcdfe6;
+            padding: 10px 15px;
+            border-radius: 4px;
+            border: 1px solid #dcdfe6;
         }
     }
 </style>
@@ -245,23 +245,23 @@
 <style lang="scss">
     .breakBrick {
         .el-form-item__label {
-            font-size : 16px;
+            font-size: 16px;
         }
         .el-form-item__content {
-            line-height : normal;
+            line-height: normal;
         }
         .tag-box {
             .el-tag {
-                margin     : {
-                    right  : 10px;
-                    bottom : 10px;
+                margin: {
+                    right: 10px;
+                    bottom: 10px;
                 }
                 :last-child {
-                    margin-right : 5px;
+                    margin-right: 5px;
                 }
             }
             .input-new-tag {
-                width : 95px;
+                width: 95px;
             }
         }
     }

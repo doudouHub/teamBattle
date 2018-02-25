@@ -16,21 +16,20 @@
     import monitorWindow from '../../common/Monitor_window';
     import vHead from './Header.vue';
     import vSidebar from './Sidebar.vue';
-    import config from '../../../config.js'
     import {mapState} from 'vuex'
 
     export default {
         components: {
-            vHead, vSidebar,monitorWindow
+            vHead, vSidebar, monitorWindow
         },
-        data() {
+        data () {
             return {}
         },
         computed: mapState([
             'userInfo'
         ]),
-        mounted() {
-            const self = this;
+        mounted () {
+            // const self = this;
 
         },
         methods: {}

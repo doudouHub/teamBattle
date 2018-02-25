@@ -20,23 +20,23 @@
                 'battle_statu',
                 'userInfo'
             ])
-        },
+        }
     }
 </script>
 
 <style scoped>
     .monitor-window {
-        position         : fixed;
-        top              : 5px;
-        right            : 5px;
-        width            : 300px;
-        min-height       : 200px;
-        padding          : 10px 15px;
-        background-color : rgba(0, 0, 0, .6);
-        color            : #fff;
-        border           : 1px solid #333;
-        border-radius    : 5px;
-        line-height      : 30px;
-        z-index          : 1000;
+        position: fixed;
+        top: 5px;
+        right: 5px;
+        width: 300px;
+        min-height: 200px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, .6);
+        color: #fff;
+        border: 1px solid #333;
+        border-radius: 5px;
+        line-height: 30px;
+        z-index: 1000;
     }
 </style>

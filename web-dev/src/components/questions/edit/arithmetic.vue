@@ -1,6 +1,6 @@
 <template>
     <!--  算术题出题  -->
-
+    <div></div>
 </template>
 
 <script>

@@ -36,7 +36,7 @@
                     name: [
                         {required: true, message: '请输入账户名称', trigger: 'blur'},
                         {min: 1, max: 18, message: '长度在 1 到 18个字符', trigger: 'blur'}
-                    ],
+                    ]
                 },
                 formLabelWidth: '70px',
                 // 登陆的账户端
@@ -45,14 +45,14 @@
         },
         methods: {
             // 打开登陆窗口
-            openToLogin(client) {
-                const self = this;
+            openToLogin (client) {
+                // const self = this;
                 this.dialogFormVisible = true;
                 this.account_type = client;
             },
             // 登陆到对应界面
-            loginToClient(formName) {
-                const self = this;
+            loginToClient (formName) {
+                // const self = this;
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         let _data = {
@@ -71,17 +71,17 @@
                 });
             }
         },
-        mounted() {
+        mounted () {
         }
     }
 </script>
 
 <style lang="scss">
     .login-wrap {
-        padding-top : 100px;
+        padding-top: 100px;
         .el-button {
-            display : block;
-            margin  : 30px auto;
+            display: block;
+            margin: 30px auto;
         }
     }
 </style>

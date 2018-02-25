@@ -46,7 +46,7 @@
         components: {
             battleOver
         },
-        data() {
+        data () {
             return {
                 // 背景模糊
                 bgBlur: 'bgBlur',
@@ -76,15 +76,15 @@
             ]),
             ...mapGetters('student', [
                 'allReadyStart'
-            ]),
+            ])
         },
         watch: {
-            allReadyStart(val) {
+            allReadyStart (val) {
                 // 确认对方题型已经加载完毕,并且已经过完倒计时，执行竞赛开始
                 this.battleStart();
             }
         },
-        mounted() {
+        mounted () {
             const self = this;
             // 获得对应题型内容
             this.$http('GET', false, './static/dataJson/breakBrick.json', {}, (data) => {
@@ -101,7 +101,7 @@
         },
         methods: {
             // 对战开始
-            battleStart() {
+            battleStart () {
                 const self = this;
                 // 去除背景模糊
                 this.bgBlur = '';
@@ -129,7 +129,7 @@
                 }, 1000);
             },
             // 转换时间为分秒
-            formatTime(time) {
+            formatTime (time) {
                 let sec = parseInt(time % 60),
                     min = parseInt(time / 60);
 
@@ -139,7 +139,7 @@
                 };
             },
             // 对战结束
-            battleOver() {
+            battleOver () {
                 this.battle_over = true;
                 // 添加背景模糊
                 this.bgBlur = 'bgBlur';
@@ -167,7 +167,7 @@
             //     }));
             // },
             // 敲击砖块
-            breakBrick(index, prop) {
+            breakBrick (index, prop) {
                 const self = this;
                 this.$set(this.ques_list[index], 'selected', true);
                 setTimeout(() => {
@@ -189,127 +189,126 @@
     }
 </script>
 
-
 <style lang="scss">
     @import "../../../styles/mixins";
 
     html {
-        background-color : #f4f4f4;
+        background-color: #f4f4f4;
     }
 
     // 砖块和的高度
-    $box-height : 600px;
+    $box-height: 600px;
 
     /* 对战面板 */
     .battle-panel.breakBrick {
-        border-radius    : 5px;
-        border           : 1px solid #ddd;
-        background-color : #fff;
-        max-width        : 1200px;
-        margin           : 20px auto 50px;
-        transition       : filter .3s;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        max-width: 1200px;
+        margin: 20px auto 50px;
+        transition: filter .3s;
         &.bgBlur {
-            -webkit-filter : blur(10px);
-            filter         : blur(10px);
+            -webkit-filter: blur(10px);
+            filter: blur(10px);
         }
         .battle-head {
-            position    : relative;
-            line-height : 80px;
-            text-align  : center;
-            font-size   : 32px;
-            font-weight : bold;
-            color       : #666;
+            position: relative;
+            line-height: 80px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #666;
             &:before, &:after {
                 @include stretch(false, false, 100%, false);
-                line-height : 50px;
-                font-size   : 16px;
-                z-index     : 10;
-                padding     : 0 15px;
+                line-height: 50px;
+                font-size: 16px;
+                z-index: 10;
+                padding: 0 15px;
             }
             &:before {
-                content : attr(data-myname);
-                left    : 0;
+                content: attr(data-myname);
+                left: 0;
             }
             &:after {
-                content : attr(data-othername);
-                right   : 0;
+                content: attr(data-othername);
+                right: 0;
             }
             .battle-score {
                 @include stretch(0, false, false, false);
-                line-height : 80px;
-                font-size   : 28px;
-                padding     : 0 15px;
+                line-height: 80px;
+                font-size: 28px;
+                padding: 0 15px;
                 &.mine {
-                    left : 0;
+                    left: 0;
                 }
                 &.other {
-                    right : 0;
+                    right: 0;
                 }
             }
             .el-progress {
-                position : absolute;
-                left     : 0;
-                right    : 0;
-                bottom   : 0;
-                z-index  : 1;
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
                 &.noTransition {
                     .el-progress-bar__inner {
-                        transition : none;
+                        transition: none;
                     }
                 }
             }
             .el-progress-bar__inner {
-                width      : 0;
-                transition : width linear 1s;
+                width: 0;
+                transition: width linear 1s;
             }
             .el-progress-bar__outer, .el-progress-bar__inner {
-                border-radius : 0;
+                border-radius: 0;
             }
         }
         .battle-content {
-            height           : $box-height;
-            background-color : #f2f2f2;
-            overflow         : hidden;
-            padding          : 0 30px;
+            height: $box-height;
+            background-color: #f2f2f2;
+            overflow: hidden;
+            padding: 0 30px;
         }
         .bricks-box {
-            position : relative;
-            width    : 100%;
-            height   : 100%;
-            margin   : 0;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin: 0;
             li {
                 @include stretch(false, false, 100%, 0);
-                z-index          : 100;
-                padding          : 0 15px;
-                white-space      : nowrap;
-                text-overflow    : ellipsis;
-                overflow         : hidden;
-                width            : 10%;
-                line-height      : 44px;
-                background-color : #fff;
-                border-radius    : 5px;
-                border           : 1px solid #ddd;
-                font-size        : 24px;
-                text-align       : center;
-                cursor           : pointer;
-                transition       : transform 10s ease-in;
-                transition       : -webkit-transform 10s ease-in;
+                z-index: 100;
+                padding: 0 15px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                width: 10%;
+                line-height: 44px;
+                background-color: #fff;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+                font-size: 24px;
+                text-align: center;
+                cursor: pointer;
+                transition: transform 10s ease-in;
+                transition: -webkit-transform 10s ease-in;
                 &.dropdown {
-                    -webkit-transform : translate3d(0, $box-height+50, 0);
-                    transform         : translate3d(0, $box-height+50, 0);
+                    -webkit-transform: translate3d(0, $box-height+50, 0);
+                    transform: translate3d(0, $box-height+50, 0);
                 }
                 // 选中后的砖块
                 &.selected {
-                    color             : #fff;
-                    -webkit-transform : translate3d(0, 300px, 0);
-                    transform         : translate3d(0, 300px, 0);
+                    color: #fff;
+                    -webkit-transform: translate3d(0, 300px, 0);
+                    transform: translate3d(0, 300px, 0);
                     &.right {
-                        background-color : #67c23a;
-                        border-color     : #67c23a;
+                        background-color: #67c23a;
+                        border-color: #67c23a;
                     }
                     &.wrong {
-                        background-color : #f56c6c;
-                        border-color     : #f56c6c;
+                        background-color: #f56c6c;
+                        border-color: #f56c6c;
                     }
                 }
             }

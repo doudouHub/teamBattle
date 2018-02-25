@@ -35,7 +35,7 @@
             vCountdown,
             ...battleTpl('play')
         },
-        data() {
+        data () {
             return {
                 // 准备倒计时
                 count_time: 3
@@ -47,7 +47,7 @@
                 'battle_statu'
             ])
         },
-        mounted() {
+        mounted () {
             // 如果当前对战状态未开始,返回学生端首页
             if (!this.battle_statu) {
                 this.$router.push({path: '/student'})

@@ -36,5 +36,9 @@ module.exports = {
         "semi": [0, "always"],
         // 连续声明
         "one-var": 0,
+        // 强制驼峰写法
+        "camelcase":1,
+        // 不能有未定义的变量
+        "no-undef": 1,
     }
 }

@@ -14,25 +14,23 @@
 </template>
 
 <script>
-    import {mapState,mapActions} from 'vuex'
+    import {mapState, mapActions} from 'vuex'
 
     export default {
         name: "battle_over",
         props: ['battle_over', 'myScore'],
-        data() {
-            return {
-
-            };
+        data () {
+            return {};
         },
         computed: {
             ...mapState('student', [
                 'otherScore'
             ]),
-            battleResult() {
-                return (this.myScore === this.otherScore)?"平局！":(this.myScore > this.otherScore ? "YOU WIN!" : "YOU LOST!")
+            battleResult () {
+                return (this.myScore === this.otherScore) ? "平局！" : (this.myScore > this.otherScore ? "YOU WIN!" : "YOU LOST!")
             }
         },
-        methods:{
+        methods: {
             ...mapActions([
                 'backToHome'
             ])
