@@ -236,8 +236,8 @@
         margin: 0 auto;
         .tag-box {
             padding: 10px 15px;
-            border-radius: 4px;
             border: 1px solid #dcdfe6;
+            border-radius: 4px;
         }
     }
 </style>

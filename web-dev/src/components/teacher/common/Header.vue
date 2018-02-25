@@ -1,18 +1,16 @@
 <template>
     <div class="header">
-     <!-- 头部内容  -->
+        <!-- 头部内容  -->
     </div>
 </template>
 <script>
     export default {
-        data() {
+        data () {
             return {
-                name: 'linxin'
+                name: ''
             }
         },
-        methods: {
-
-        }
+        methods: {}
     }
 </script>
 

@@ -1,11 +1,11 @@
 export const state = {
     // 分发题目等待动画
-    distriLoading:false,
+    distriLoading: false,
     // 题目列表
     quesData: {
         statu: false,
         time: 120,
         data: ''
     },
-    battleList:[]
+    battleList: []
 };

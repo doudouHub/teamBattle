@@ -29,10 +29,10 @@
         computed: {
             ...mapGetters('teacher', [
                 'rankingList'
-            ]),
+            ])
         },
         methods: {},
-        mounted() {
+        mounted () {
             // 如果当前对战状态未开始,返回老师端首页
             if (!this.$store.state.battle_statu) {
                 this.$router.push({path: '/teacher'})
@@ -45,31 +45,31 @@
     @import "../../../styles/mixins";
 
     html {
-        background-color : #f4f4f4;
+        background-color: #f4f4f4;
     }
 
     .battle-rankings {
-        max-width        : 640px;
-        border-radius    : 5px;
-        border           : 1px solid #ddd;
-        background-color : #fff;
-        margin           : 20px auto 50px;
+        max-width: 640px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        margin: 20px auto 50px;
     }
 
     .battle-rank-list {
-        margin  : 0;
-        padding : 0;
+        margin: 0;
+        padding: 0;
         .item {
-            border-bottom : 1px solid #ddd;
-            line-height   : 50px;
-            padding       : 0 15px;
-            font-size     : 18px;
-            overflow      : hidden;
+            border-bottom: 1px solid #ddd;
+            line-height: 50px;
+            padding: 0 15px;
+            font-size: 18px;
+            overflow: hidden;
             .item-score {
-                font-weight : bold;
+                font-weight: bold;
             }
             &:last-child {
-                border-bottom : none;
+                border-bottom: none;
             }
         }
     }

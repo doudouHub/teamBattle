@@ -21,16 +21,16 @@
 
     export default {
         components: {
-            vHead, vSidebar,monitorWindow
+            vHead, vSidebar, monitorWindow
         },
-        data() {
+        data () {
             return {}
         },
         computed: mapState([
             'userInfo'
         ]),
-        mounted() {
-            const self = this;
+        mounted () {
+            // const self = this;
         },
         methods: {}
     }

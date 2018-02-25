@@ -9,5 +9,5 @@ export const state = {
     battle_statu: false,
     // 对战连接状态
     websocket_statu: false,
-    ques_type:'',
+    ques_type: ''
 }

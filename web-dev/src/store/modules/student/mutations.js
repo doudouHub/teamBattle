@@ -4,7 +4,7 @@ import {router} from '../../../router/index'
 
 export default {
     // 更新匹配信息
-    [types.UPDATE_MATCHING](state, data) {
+    [types.UPDATE_MATCHING] (state, data) {
         switch (data.type) {
             case 'battle_init':
                 // 初始化对战

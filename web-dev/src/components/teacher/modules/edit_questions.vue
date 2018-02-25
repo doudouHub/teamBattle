@@ -26,14 +26,14 @@
         components: {
             ...battleTpl('edit')
         },
-        data() {
+        data () {
             return {}
         },
         computed: {
             ...mapState([
                 'ques_type'
             ])
-        },
+        }
     }
 </script>
 

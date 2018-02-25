@@ -58,21 +58,21 @@
         bottom: 0;
         z-index: 100;
         .cuount-down-box {
+            @include stretch(50%, false, false, 50%);
+            z-index: 100;
             width: 100px;
             height: 100px;
-            line-height: 100px;
-            text-align: center;
-            background-color: #f2f2f2;
-            font-size: 45px;
-            font-weight: bold;
-            border-radius: 50%;
             border: 1px solid #ddd;
-            @include stretch(50%, false, false, 50%);
             margin: {
                 left: -50px;
                 top: -50px;
             }
-            z-index: 100;
+            background-color: #f2f2f2;
+            font-size: 45px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 100px;
+            border-radius: 50%;
         }
         .cover {
             position: relative;

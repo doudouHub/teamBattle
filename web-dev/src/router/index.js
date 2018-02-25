@@ -28,21 +28,21 @@ export const router = new Router({
                     meta: {
                         title: '教师端首页'
                     },
-                    component: resolve => require(['../components/teacher/default.vue'], resolve),
+                    component: resolve => require(['../components/teacher/default.vue'], resolve)
                 },
                 {
                     path: 'viewBattle',
                     meta: {
                         title: '教师端对战榜'
                     },
-                    component: resolve => require(['../components/teacher/modules/battle_list_view.vue'], resolve),
+                    component: resolve => require(['../components/teacher/modules/battle_list_view.vue'], resolve)
                 },
                 {
                     path: 'editQues',
                     meta: {
                         title: '题目编辑'
                     },
-                    component: resolve => require(['../components/teacher/modules/edit_questions.vue'], resolve),
+                    component: resolve => require(['../components/teacher/modules/edit_questions.vue'], resolve)
                 }
             ]
         },
@@ -58,19 +58,19 @@ export const router = new Router({
                     meta: {
                         title: '学生端首页'
                     },
-                    component: resolve => require(['../components/student/default.vue'], resolve),
+                    component: resolve => require(['../components/student/default.vue'], resolve)
                 },
                 {
                     meta: {
                         title: '学生端对战界面'
                     },
                     path: 'battle',
-                    component: resolve => require(['../components/student/modules/battle.vue'], resolve),
+                    component: resolve => require(['../components/student/modules/battle.vue'], resolve)
                 }
             ]
         },
         // 路由错误，404page
-        {path: '*', component: resolve => require(['../components/page/page404.vue'], resolve)},
+        {path: '*', component: resolve => require(['../components/page/page404.vue'], resolve)}
     ]
 })
 

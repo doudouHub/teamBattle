@@ -14,7 +14,7 @@
         name: "teacher",
         components: {
             vQuestion
-        },
+        }
     }
 </script>
 
