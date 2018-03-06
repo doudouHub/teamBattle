@@ -1,6 +1,7 @@
 **/build/
 **/config/
 **/dist/
+**/vendors/
 /*.js
 **/test/unit/coverage/
 /server-dev/**

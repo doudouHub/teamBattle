@@ -51,7 +51,7 @@
                 // 背景模糊
                 bgBlur: 'bgBlur',
 
-                total_time: 0,
+                totalTime: 0,
                 // 我的总分
                 total_score: 0,
                 battle_time: {
@@ -90,7 +90,7 @@
             this.$http('GET', false, './static/dataJson/breakBrick.json', {}, (data) => {
                 self.ques_list = data.list;
                 self.ques_title = data.title;
-                self.total_time = data.total_time;
+                self.totalTime = data.totalTime;
                 // 通知对方已经准备就绪 - 并传递生成的对战规则
                 websocket.send(JSON.stringify({type: 'battle_isReady'}));
                 if (self.otherIsReady) {
@@ -106,23 +106,21 @@
                 // 去除背景模糊
                 this.bgBlur = '';
                 this.battle_started = true;
-
-                let total_time = this.total_time;
-
-                this.battle_time = this.formatTime(total_time);
+                let totalTime = this.totalTime;
+                this.battle_time = this.formatTime(totalTime);
                 // 对战倒计时
                 this.battle_timer = setInterval(function () {
-                    if (!total_time) {
+                    if (!totalTime) {
                         // 倒计时结束,对战结束
                         clearInterval(self.battle_timer);
                         self.battleOver();
                     } else {
-                        total_time--;
-                        self.battle_progress = (1 - (total_time - 1) / self.total_time) * 100;
-                        self.battle_time = self.formatTime(total_time);
-                        if ((total_time / self.total_time) > 40 && total_time > 10) {
+                        totalTime--;
+                        self.battle_progress = (1 - (totalTime - 1) / self.totalTime) * 100;
+                        self.battle_time = self.formatTime(totalTime);
+                        if ((totalTime / self.totalTime) > 40 && totalTime > 10) {
                             self.battle_progStatu = '';
-                        } else if (total_time <= 10) {
+                        } else if (totalTime <= 10) {
                             self.battle_progStatu = 'exception';
                         }
                     }

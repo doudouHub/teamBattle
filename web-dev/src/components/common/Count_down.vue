@@ -22,6 +22,7 @@
         mounted () {
             const self = this;
             this.time = this.count_time;
+            clearInterval(this.timer);
             this.timer = setInterval(() => {
                 self.time--;
                 if (!self.time) {

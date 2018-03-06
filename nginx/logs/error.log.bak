@@ -1,0 +1,4 @@
+2018/02/23 16:50:27 [emerg] 13904#12896: CreateDirectory() "D:\studyFiles\teamBattle\nginx/temp/client_body_temp" failed (3: The system cannot find the path specified)
+2018/02/23 16:51:59 [emerg] 13144#12320: CreateDirectory() "D:\studyFiles\teamBattle\nginx/temp/client_body_temp" failed (3: The system cannot find the path specified)
+2018/02/23 16:58:40 [emerg] 5204#9936: CreateDirectory() "D:\software\nginx-1.13.9/temp/client_body_temp" failed (3: The system cannot find the path specified)
+2018/02/23 17:04:32 [emerg] 3056#9916: CreateDirectory() "D:\studyFiles\teamBattle\nginx/temp/client_body_temp" failed (3: The system cannot find the path specified)
